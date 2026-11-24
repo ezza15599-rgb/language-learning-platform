@@ -1,407 +1,212 @@
 
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b142b">
-<title>ALMONTΛZEM | Language Learning</title>
-
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;
- font-family:Arial,sans-serif;
- background:#0b142b;
- color:white;
+/* ALMONTAZEM Globe */
+.language-universe {
+  text-align: center;
+  padding: 35px 15px;
+  color: white;
+  background: #071329;
+  border-radius: 22px;
+  margin: 25px auto;
+  max-width: 850px;
 }
-header{
- display:flex;
- justify-content:space-between;
- align-items:center;
- flex-wrap:wrap;
- gap:15px;
- padding:20px;
- background:#111e3d;
- border-bottom:1px solid #29395d;
+.language-globe {
+  width: 245px;
+  height: 245px;
+  margin: 15px auto 30px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 30% 25%, #75d9ff, #2478b8 35%, #102e68 72%, #061329);
+  box-shadow: 0 0 25px #28a9ff88, inset -18px -12px 35px #02091c;
+  animation: globeFloat 4s ease-in-out infinite;
 }
-.logo{
- color:#e6c46a;
- font-size:25px;
- font-weight:bold;
- letter-spacing:1px;
+.language-globe::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 38px, #a7eaff55 39px 40px),
+    repeating-linear-gradient(0deg, transparent 0 38px, #a7eaff44 39px 40px);
+  transform: scaleX(.65);
+  animation: globeSpin 12s linear infinite;
 }
-select{
- background:#1b2b4d;
- color:white;
- border:1px solid #526487;
- border-radius:10px;
- padding:12px;
- font-size:15px;
+.language-globe::after {
+  content: "";
+  position: absolute;
+  width: 75%;
+  height: 100%;
+  border: 2px solid #a9eaff66;
+  border-radius: 50%;
 }
-main{
- max-width:1000px;
- margin:auto;
- padding:45px 18px;
- text-align:center;
+.globe-names {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 9px 5px;
+  padding: 12px;
+  direction: ltr;
 }
-h1{font-size:34px;color:#e6c46a}
-.description{
- color:#c4cde0;
- line-height:1.9;
+.globe-names span {
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  background: #061b3dcc;
+  border: 1px solid #9ce5ff88;
+  border-radius: 12px;
+  padding: 4px 6px;
+  white-space: nowrap;
 }
-.section-title{margin-top:38px}
-.languages{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
- gap:14px;
- margin-top:20px;
+@keyframes globeFloat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
 }
-.language{
- background:#18294d;
- border:2px solid transparent;
- border-radius:15px;
- padding:20px 10px;
- cursor:pointer;
- font-size:16px;
- color:white;
+@keyframes globeSpin {
+  to { background-position: 80px 0, 0 80px; }
 }
-.language.selected{
- border-color:#e6c46a;
- background:#253b68;
+.al-level-page {
+  display: none;
+  padding: 25px 15px;
+  text-align: center;
+  color: white;
+  background: #0b1933;
+  border-radius: 18px;
+  margin: 20px auto;
+  max-width: 850px;
 }
-.flag{
- display:block;
- font-size:29px;
- margin-bottom:10px;
+.al-language-buttons, .al-level-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(125px,1fr));
+  gap: 12px;
+  margin-top: 22px;
 }
-.levels{
- display:grid;
- grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
- gap:12px;
- margin-top:20px;
+.al-language-buttons button, .al-level-buttons button,
+.al-back-button {
+  padding: 14px 10px;
+  border: 1px solid #d5ae55;
+  border-radius: 12px;
+  color: white;
+  background: #142b50;
+  font-size: 15px;
+  cursor: pointer;
 }
-.level{
- background:#18294d;
- border:2px solid transparent;
- border-radius:12px;
- padding:17px 10px;
- cursor:pointer;
- color:white;
- font-size:17px;
+.al-language-buttons button:hover,
+.al-level-buttons button:hover,
+.al-back-button:hover {
+  background: #a77c2c;
 }
-.level.selected{
- border-color:#e6c46a;
- background:#253b68;
+.al-level-buttons button strong {
+  display: block;
+  font-size: 20px;
+  color: #f2c76b;
 }
-button{
- background:#d8b653;
- color:#111e3d;
- border:0;
- padding:15px 35px;
- border-radius:12px;
- font-size:17px;
- font-weight:bold;
- cursor:pointer;
- margin-top:30px;
+#al-selected-language {
+  color: #f2c76b;
+  font-weight: bold;
 }
-#result{
- display:none;
- background:#18294d;
- padding:25px;
- border-radius:16px;
- margin-top:30px;
- line-height:2;
-}
-.watermark{
- margin-top:65px;
- font-size:clamp(25px,7vw,65px);
- font-weight:bold;
- letter-spacing:3px;
- color:rgba(230,198,106,.13);
- user-select:none;
-}
-footer{
- text-align:center;
- color:#8292b1;
- padding:25px;
+#al-choice-result {
+  margin-top: 20px;
+  color: #f2c76b;
+  font-size: 17px;
 }
 </style>
-</head>
 
-<body>
+<section class="language-universe" id="al-universe">
+  <h2>🌍 ALMONTAZEM</h2>
+  <p>One World. Many Languages.</p>
 
-<header>
- <div class="logo">ALMONTΛZEM</div>
-
- <select id="interfaceLanguage" aria-label="Interface language">
-  <option value="ar">🇪🇬 العربية</option>
-  <option value="en">🇬🇧 English</option>
-  <option value="zh">🇨🇳 中文</option>
-  <option value="fr">🇫🇷 Français</option>
-  <option value="de">🇩🇪 Deutsch</option>
-  <option value="es">🇪🇸 Español</option>
-  <option value="it">🇮🇹 Italiano</option>
-  <option value="ru">🇷🇺 Русский</option>
-  <option value="ja">🇯🇵 日本語</option>
-  <option value="tr">🇹🇷 Türkçe</option>
-  <option value="pt">🇵🇹 Português</option>
-  <option value="hi">🇮🇳 हिन्दी</option>
-  <option value="ko">🇰🇷 한국어</option>
- </select>
-</header>
-
-<main>
-
- <h1 data-i18n="title">تعلم لغة جديدة وافتح عالمًا جديدًا</h1>
-
- <p class="description" data-i18n="description">
- منصة عالمية لتعلم اللغات من الصفر حتى الاحتراف.
- </p>
-
- <h2 class="section-title" data-i18n="choose">اختر لغة التعلم</h2>
-
- <div class="languages">
-  <div class="language selected" data-language="English">
-   <span class="flag">🇬🇧</span>English
+  <div class="language-globe">
+    <div class="globe-names">
+      <span>العربية</span>
+      <span>ENGLISH</span>
+      <span>ESPAÑOL</span>
+      <span>FRANÇAIS</span>
+      <span>DEUTSCH</span>
+      <span>中文</span>
+      <span>ITALIANO</span>
+      <span>РУССКИЙ</span>
+      <span>日本語</span>
+      <span>TÜRKÇE</span>
+      <span>PORTUGUÊS</span>
+      <span>हिन्दी</span>
+      <span>한국어</span>
+    </div>
   </div>
-  <div class="language" data-language="Spanish">
-   <span class="flag">🇪🇸</span>Español
-  </div>
-  <div class="language" data-language="French">
-   <span class="flag">🇫🇷</span>Français
-  </div>
-  <div class="language" data-language="German">
-   <span class="flag">🇩🇪</span>Deutsch
-  </div>
-  <div class="language" data-language="Italian">
-   <span class="flag">🇮🇹</span>Italiano
-  </div>
-  <div class="language" data-language="Arabic">
-   <span class="flag">🇪🇬</span>العربية
-  </div>
-  <div class="language" data-language="Chinese">
-   <span class="flag">🇨🇳</span>中文
-  </div>
-  <div class="language" data-language="Japanese">
-   <span class="flag">🇯🇵</span>日本語
-  </div>
-  <div class="language" data-language="Turkish">
-   <span class="flag">🇹🇷</span>Türkçe
-  </div>
-  <div class="language" data-language="Russian">
-   <span class="flag">🇷🇺</span>Русский
-  </div>
- </div>
 
- <h2 class="section-title" data-i18n="level">اختر مستواك</h2>
+  <h3>Choose Your Language</h3>
+  <p>Select the language you want to learn</p>
 
- <div class="levels">
-  <div class="level selected" data-level="A1">A1</div>
-  <div class="level" data-level="A2">A2</div>
-  <div class="level" data-level="B1">B1</div>
-  <div class="level" data-level="B2">B2</div>
-  <div class="level" data-level="C1">C1</div>
-  <div class="level" data-level="C2">C2</div>
- </div>
+  <div class="al-language-buttons">
+    <button onclick="alChooseLanguage('English')">🇬🇧 English</button>
+    <button onclick="alChooseLanguage('Spanish')">🇪🇸 Spanish</button>
+    <button onclick="alChooseLanguage('French')">🇫🇷 French</button>
+    <button onclick="alChooseLanguage('German')">🇩🇪 German</button>
+    <button onclick="alChooseLanguage('Italian')">🇮🇹 Italian</button>
+    <button onclick="alChooseLanguage('Arabic')">🇪🇬 Arabic</button>
+    <button onclick="alChooseLanguage('Chinese')">🇨🇳 Chinese</button>
+    <button onclick="alChooseLanguage('Japanese')">🇯🇵 Japanese</button>
+    <button onclick="alChooseLanguage('Turkish')">🇹🇷 Turkish</button>
+    <button onclick="alChooseLanguage('Russian')">🇷🇺 Russian</button>
+  </div>
+</section>
 
- <button onclick="startLearning()" data-i18n="start">
-  ابدأ التعلم الآن ←
- </button>
+<section class="al-level-page" id="al-level-page">
+  <h2>Choose Your Level</h2>
+  <p>Your learning language: <span id="al-selected-language"></span></p>
+  <p>Select your current level to continue</p>
 
- <div id="result">
-  <h2 data-i18n="success">🎉 اختيارك جاهز!</h2>
-  <p id="courseInfo"></p>
-  <p data-i18n="coming">
-   سيتم إضافة الدروس التفاعلية والاختبارات قريبًا.
-  </p>
- </div>
+  <div class="al-level-buttons">
+    <button onclick="alChooseLevel('A1','Beginner')">
+      <strong>A1</strong>Beginner
+    </button>
+    <button onclick="alChooseLevel('A2','Elementary')">
+      <strong>A2</strong>Elementary
+    </button>
+    <button onclick="alChooseLevel('B1','Intermediate')">
+      <strong>B1</strong>Intermediate
+    </button>
+    <button onclick="alChooseLevel('B2','Upper Intermediate')">
+      <strong>B2</strong>Upper Intermediate
+    </button>
+    <button onclick="alChooseLevel('C1','Advanced')">
+      <strong>C1</strong>Advanced
+    </button>
+    <button onclick="alChooseLevel('C2','Proficiency')">
+      <strong>C2</strong>Proficiency
+    </button>
+  </div>
 
- <div class="watermark">ALMONTΛZEM</div>
-
-</main>
-
-<footer>
- ALMONTΛZEM © 2026
-</footer>
+  <div id="al-choice-result"></div>
+  <br>
+  <button class="al-back-button" onclick="alGoBack()">← Back to Languages</button>
+</section>
 
 <script>
-const translations={
- ar:{
-  title:"تعلم لغة جديدة وافتح عالمًا جديدًا",
-  description:"منصة عالمية لتعلم اللغات من الصفر حتى الاحتراف.",
-  choose:"اختر لغة التعلم",
-  level:"اختر مستواك",
-  start:"ابدأ التعلم الآن ←",
-  success:"🎉 اختيارك جاهز!",
-  coming:"سيتم إضافة الدروس التفاعلية والاختبارات قريبًا."
- },
- en:{
-  title:"Learn a New Language, Open a New World",
-  description:"A global platform to learn languages from beginner to advanced.",
-  choose:"Choose Your Learning Language",
-  level:"Choose Your Level",
-  start:"Start Learning Now →",
-  success:"🎉 Your Selection Is Ready!",
-  coming:"Interactive lessons and tests are coming soon."
- },
- zh:{
-  title:"学习一门新语言，开启一个新世界",
-  description:"从初级到高级学习世界语言。",
-  choose:"选择学习语言",
-  level:"选择你的等级",
-  start:"立即开始学习 →",
-  success:"🎉 选择完成！",
-  coming:"互动课程和测试即将推出。"
- },
- fr:{
-  title:"Apprenez une langue, ouvrez un nouveau monde",
-  description:"Une plateforme mondiale pour apprendre les langues.",
-  choose:"Choisissez votre langue",
-  level:"Choisissez votre niveau",
-  start:"Commencer maintenant →",
-  success:"🎉 Votre choix est prêt !",
-  coming:"Les cours interactifs arrivent bientôt."
- },
- de:{
-  title:"Lerne eine Sprache und entdecke eine neue Welt",
-  description:"Eine globale Plattform zum Sprachenlernen.",
-  choose:"Wähle deine Lernsprache",
-  level:"Wähle dein Niveau",
-  start:"Jetzt lernen →",
-  success:"🎉 Deine Auswahl ist bereit!",
-  coming:"Interaktive Lektionen kommen bald."
- },
- es:{
-  title:"Aprende un idioma y descubre un nuevo mundo",
-  description:"Una plataforma global para aprender idiomas.",
-  choose:"Elige tu idioma",
-  level:"Elige tu nivel",
-  start:"Comenzar ahora →",
-  success:"🎉 ¡Tu selección está lista!",
-  coming:"Las lecciones interactivas llegarán pronto."
- },
- it:{
-  title:"Impara una lingua e scopri un nuovo mondo",
-  description:"Una piattaforma globale per imparare le lingue.",
-  choose:"Scegli la lingua",
-  level:"Scegli il tuo livello",
-  start:"Inizia ora →",
-  success:"🎉 La tua scelta è pronta!",
-  coming:"Le lezioni interattive arriveranno presto."
- },
- ru:{
-  title:"Изучай язык и открывай новый мир",
-  description:"Глобальная платформа для изучения языков.",
-  choose:"Выберите язык обучения",
-  level:"Выберите уровень",
-  start:"Начать обучение →",
-  success:"🎉 Ваш выбор готов!",
-  coming:"Интерактивные уроки скоро появятся."
- },
- ja:{
-  title:"新しい言語を学び、新しい世界を開こう",
-  description:"世界中の言語を学べるプラットフォーム。",
-  choose:"学習する言語を選択",
-  level:"レベルを選択",
-  start:"学習を始める →",
-  success:"🎉 選択完了！",
-  coming:"インタラクティブなレッスンは近日公開。"
- },
- tr:{
-  title:"Yeni bir dil öğren, yeni bir dünya keşfet",
-  description:"Dünya dillerini öğrenmek için küresel platform.",
-  choose:"Öğrenme dilini seç",
-  level:"Seviyeni seç",
-  start:"Hemen öğrenmeye başla →",
-  success:"🎉 Seçimin hazır!",
-  coming:"Etkileşimli dersler yakında."
- },
- pt:{
-  title:"Aprenda um idioma e descubra um novo mundo",
-  description:"Uma plataforma global para aprender idiomas.",
-  choose:"Escolha seu idioma",
-  level:"Escolha seu nível",
-  start:"Começar agora →",
-  success:"🎉 Sua escolha está pronta!",
-  coming:"Aulas interativas em breve."
- },
- hi:{
-  title:"एक नई भाषा सीखें, एक नई दुनिया खोलें",
-  description:"भाषाएँ सीखने का एक वैश्विक मंच।",
-  choose:"अपनी सीखने की भाषा चुनें",
-  level:"अपना स्तर चुनें",
-  start:"अभी सीखना शुरू करें →",
-  success:"🎉 आपका चयन तैयार है!",
-  coming:"इंटरैक्टिव पाठ जल्द आ रहे हैं।"
- },
- ko:{
-  title:"새로운 언어를 배우고 새로운 세계를 열어보세요",
-  description:"세계 언어를 배우는 글로벌 플랫폼.",
-  choose:"학습 언어 선택",
-  level:"레벨 선택",
-  start:"지금 학습 시작 →",
-  success:"🎉 선택이 완료되었습니다!",
-  coming:"인터랙티브 수업이 곧 제공됩니다."
- }
-};
+let alLearningLanguage = "";
 
-let selectedLanguage="English";
-let selectedLevel="A1";
-
-const selector=document.getElementById("interfaceLanguage");
-
-function setInterface(lang){
- const t=translations[lang]||translations.en;
-
- document.documentElement.lang=lang;
- document.documentElement.dir=lang==="ar"?"rtl":"ltr";
-
- document.querySelectorAll("[data-i18n]").forEach(el=>{
-  const key=el.dataset.i18n;
-  el.textContent=t[key];
- });
-
- selector.value=lang;
- localStorage.setItem("almontazem-language",lang);
+function alChooseLanguage(language) {
+  alLearningLanguage = language;
+  document.getElementById("al-selected-language").textContent = language;
+  document.getElementById("al-universe").style.display = "none";
+  document.getElementById("al-level-page").style.display = "block";
+  document.getElementById("al-choice-result").textContent = "";
+  document.getElementById("al-level-page").scrollIntoView({behavior:"smooth"});
 }
 
-selector.addEventListener("change",()=>{
- setInterface(selector.value);
-});
-
-document.querySelectorAll(".language").forEach(item=>{
- item.onclick=()=>{
-  document.querySelectorAll(".language").forEach(x=>x.classList.remove("selected"));
-  item.classList.add("selected");
-  selectedLanguage=item.dataset.language;
- };
-});
-
-document.querySelectorAll(".level").forEach(item=>{
- item.onclick=()=>{
-  document.querySelectorAll(".level").forEach(x=>x.classList.remove("selected"));
-  item.classList.add("selected");
-  selectedLevel=item.dataset.level;
- };
-});
-
-function startLearning(){
- const lang=selector.value;
- const info=lang==="ar"
- ? "لغة التعلم: "+selectedLanguage+" | المستوى: "+selectedLevel
- : lang==="zh"
- ? "学习语言: "+selectedLanguage+" | 等级: "+selectedLevel
- : "Learning language: "+selectedLanguage+" | Level: "+selectedLevel;
-
- document.getElementById("courseInfo").textContent=info;
- document.getElementById("result").style.display="block";
- document.getElementById("result").scrollIntoView({behavior:"smooth"});
+function alChooseLevel(level, name) {
+  document.getElementById("al-choice-result").textContent =
+    "Your language: " + alLearningLanguage +
+    " | Your level: " + level + " - " + name;
 }
 
-const savedLanguage=localStorage.getItem("almontazem-language")||"ar";
-setInterface(savedLanguage);
+function alGoBack() {
+  document.getElementById("al-level-page").style.display = "none";
+  document.getElementById("al-universe").style.display = "block";
+  document.getElementById("al-universe").scrollIntoView({behavior:"smooth"});
+}
 </script>
-
-</body>
-</html>
