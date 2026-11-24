@@ -115,7 +115,7 @@ main{width:100%;max-width:850px;margin:auto;padding:15px}
     <div class="auth-field"><label for="user-email">البريد الإلكتروني</label><input id="user-email" type="email" placeholder="example@email.com" required autocomplete="email"></div>
     <div class="auth-field"><label for="user-password">كلمة المرور</label><input id="user-password" type="password" placeholder="اكتب كلمة المرور" required minlength="6" autocomplete="current-password"></div>
     <div class="auth-field" id="phone-field">
-     <label for="user-phone">رقم الهاتف</label>
+     <label for="user-phone">رقم الهاتف (اختياري)</label>
      <div class="phone-row">
       <select id="country-code" aria-label="كود الدولة">
        <option value="+20">🇪🇬 +20</option><option value="+966">🇸🇦 +966</option><option value="+971">🇦🇪 +971</option><option value="+965">🇰🇼 +965</option><option value="+974">🇶🇦 +974</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option><option value="+49">🇩🇪 +49</option><option value="+34">🇪🇸 +34</option><option value="+39">🇮🇹 +39</option><option value="+90">🇹🇷 +90</option><option value="+81">🇯🇵 +81</option><option value="+86">🇨🇳 +86</option>
@@ -180,9 +180,9 @@ main{width:100%;max-width:850px;margin:auto;padding:15px}
 <script>
 /* ملاحظة: هذه واجهة تجريبية. تسجيل الحساب وGoogle واستعادة كلمة المرور
    تحتاج لاحقاً إلى ربط خدمة مصادقة مثل Firebase. */
-let authMode="signup";
+let authMode="signup";window.authMode=authMode;
 function setAuthMode(mode){
- authMode=mode;const signup=mode==="signup";
+ authMode=mode;window.authMode=mode;const signup=mode==="signup";
  document.getElementById("signup-tab").classList.toggle("active",signup);
  document.getElementById("login-tab").classList.toggle("active",!signup);
  document.getElementById("name-field").classList.toggle("hidden",!signup);
@@ -315,6 +315,154 @@ try{
  }
 }catch(e){}
 </script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+  sendPasswordResetEmail,
+  updateProfile,
+  signOut
+} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA_6sf5f2m81AUhwcxegejZzJRGGrQDUMc",
+  authDomain: "almontazem.firebaseapp.com",
+  projectId: "almontazem",
+  storageBucket: "almontazem.firebasestorage.app",
+  messagingSenderId: "370337192110",
+  appId: "1:370337192110:web:bea4071d60fb917dd2753f"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+function showAuthMessage(message, success = false) {
+  const box = document.getElementById("auth-message");
+  box.style.color = success ? "#187443" : "#b02b36";
+  box.textContent = message;
+}
+
+function readableAuthError(error) {
+  const code = error?.code || "";
+  const messages = {
+    "auth/email-already-in-use": "هذا البريد مسجل بالفعل. جرّب تسجيل الدخول.",
+    "auth/invalid-email": "البريد الإلكتروني غير صحيح.",
+    "auth/weak-password": "كلمة المرور ضعيفة. استخدم 6 أحرف على الأقل.",
+    "auth/invalid-credential": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+    "auth/user-not-found": "لا يوجد حساب بهذا البريد. أنشئ حسابًا جديدًا.",
+    "auth/wrong-password": "كلمة المرور غير صحيحة.",
+    "auth/too-many-requests": "محاولات كثيرة. انتظر قليلًا ثم حاول مرة أخرى.",
+    "auth/network-request-failed": "تحقق من اتصال الإنترنت ثم حاول مرة أخرى.",
+    "auth/popup-closed-by-user": "تم إغلاق نافذة Google قبل إكمال تسجيل الدخول.",
+    "auth/unauthorized-domain": "عنوان الموقع غير مضاف إلى النطاقات المسموح بها في Firebase.",
+    "auth/operation-not-allowed": "طريقة تسجيل الدخول هذه غير مفعّلة في Firebase.",
+    "auth/account-exists-with-different-credential": "هذا البريد مرتبط بطريقة تسجيل دخول أخرى."
+  };
+  return messages[code] || "حدث خطأ أثناء العملية. تأكد من البيانات وحاول مرة أخرى.";
+}
+
+window.submitAuth = async function(event) {
+  event.preventDefault();
+
+  const email = document.getElementById("user-email").value.trim();
+  const password = document.getElementById("user-password").value;
+  const name = document.getElementById("user-name").value.trim();
+  const button = document.getElementById("submit-auth");
+
+  if (!email || !password) {
+    showAuthMessage("اكتب البريد الإلكتروني وكلمة المرور.");
+    return;
+  }
+  if (window.authMode === "signup" && !name) {
+    showAuthMessage("من فضلك اكتب اسمك.");
+    return;
+  }
+  if (password.length < 6) {
+    showAuthMessage("كلمة المرور يجب أن تكون 6 أحرف على الأقل.");
+    return;
+  }
+
+  button.disabled = true;
+  button.textContent = "جارٍ التنفيذ...";
+  try {
+    if (window.authMode === "signup") {
+      const result = await createUserWithEmailAndPassword(auth, email, password);
+      await updateProfile(result.user, { displayName: name });
+      showAuthMessage("تم إنشاء حسابك بنجاح.", true);
+    } else {
+      await signInWithEmailAndPassword(auth, email, password);
+      showAuthMessage("تم تسجيل الدخول بنجاح.", true);
+    }
+  } catch (error) {
+    showAuthMessage(readableAuthError(error));
+  } finally {
+    button.disabled = false;
+    button.textContent = window.authMode === "signup" ? "إنشاء حساب جديد" : "تسجيل الدخول";
+  }
+};
+
+window.googleSignIn = async function() {
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({ prompt: "select_account" });
+  try {
+    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      await signInWithRedirect(auth, provider);
+    } else {
+      await signInWithPopup(auth, provider);
+    }
+  } catch (error) {
+    showAuthMessage(readableAuthError(error));
+  }
+};
+
+window.forgotPassword = async function() {
+  const email = document.getElementById("user-email").value.trim();
+  if (!email) {
+    showAuthMessage("اكتب بريدك الإلكتروني أولًا، ثم اضغط نسيت كلمة المرور.");
+    return;
+  }
+  try {
+    await sendPasswordResetEmail(auth, email);
+    showAuthMessage("لو البريد مسجل، هتوصلك رسالة لإعادة تعيين كلمة المرور. راجع الوارد والرسائل غير المرغوب فيها.", true);
+  } catch (error) {
+    showAuthMessage(readableAuthError(error));
+  }
+};
+
+window.logout = async function() {
+  try {
+    await signOut(auth);
+  } catch (error) {
+    showAuthMessage(readableAuthError(error));
+  }
+};
+
+getRedirectResult(auth).catch(error => showAuthMessage(readableAuthError(error)));
+
+onAuthStateChanged(auth, user => {
+  if (user) {
+    const authPage = document.getElementById("auth-page");
+    const platform = document.getElementById("platform");
+    if (authPage) authPage.style.display = "none";
+    if (platform) platform.style.display = "block";
+    window.scrollTo({ top: 0, behavior: "instant" });
+  } else {
+    const authPage = document.getElementById("auth-page");
+    const platform = document.getElementById("platform");
+    if (platform) platform.style.display = "none";
+    if (authPage) authPage.style.display = "block";
+  }
+});
+</script>
+
 </body>
 </html>
 
