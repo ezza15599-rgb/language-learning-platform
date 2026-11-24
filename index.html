@@ -1,245 +1,230 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ALMONTAZEM</title>
-
+<title>ALMONTAΛZEM</title>
 <style>
 *{box-sizing:border-box}
-html,body{
- margin:0;padding:0;width:100%;max-width:100%;
- min-height:100%;overflow-x:hidden
-}
-body{
- background:#071329;color:white;
- font-family:Arial,sans-serif;touch-action:pan-y
-}
-header{
- width:100%;padding:16px 12px;
- background:#0b1c38;border-bottom:1px solid #c9a34d;
- text-align:center
-}
+html,body{margin:0;padding:0;width:100%;max-width:100%;min-height:100%;overflow-x:hidden}
+body{background:#071329;color:white;font-family:Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}
+.hidden{display:none!important}
+
+/* شاشة البداية وتسجيل الحساب */
+.auth-page{min-height:100vh;padding:20px 14px 35px;background:radial-gradient(circle at 15% 25%,#1689e9 0,transparent 35%),linear-gradient(145deg,#061747,#0754b9 60%,#071a48)}
+.auth-top{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.auth-logo{color:#fff;font-size:clamp(23px,5vw,36px);font-weight:900;letter-spacing:1px}
+.auth-logo span{color:#ffd45e}
+.auth-layout{max-width:1100px;margin:30px auto 0;display:grid;grid-template-columns:1.1fr .9fr;gap:25px;align-items:center}
+.auth-art{text-align:center;position:relative;padding:15px 5px}
+.auth-art h2{font-size:clamp(23px,4vw,34px);color:#fff;line-height:1.5}
+.tagline{color:#ffdb78;font-weight:bold;font-size:18px}
+.art-world{width:min(290px,72vw);height:min(290px,72vw);margin:15px auto;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(circle at 35% 30%,#a8ecff,#258ee5 42%,#063b8b 75%,#03183d);box-shadow:0 0 45px #54c8ff99,inset -20px -20px 35px #001239;border:3px solid #a6ddff}
+.art-world:before{content:"";position:absolute;width:75%;height:100%;border:2px solid #c5eaff99;border-radius:50%}
+.art-world:after{content:"";position:absolute;width:100%;height:45%;border-top:2px solid #c5eaff88;border-bottom:2px solid #c5eaff88;border-radius:50%}
+.art-earth{font-size:130px;z-index:1;filter:drop-shadow(0 8px 9px #001d52)}
+.art-owl{position:absolute;z-index:3;bottom:-20px;left:50%;transform:translateX(-50%);font-size:90px;filter:drop-shadow(0 8px 8px #00143c)}
+.speech{position:absolute;z-index:4;padding:8px 13px;border-radius:18px;color:white;font-weight:bold;box-shadow:0 5px 12px #00143c55}
+.speech.one{top:20px;left:0;background:#168bea}.speech.two{top:65px;right:0;background:#e83e52}.speech.three{bottom:35px;right:0;background:#6b38d9}
+.book-stack{display:flex;flex-direction:column;gap:5px;max-width:290px;margin:35px auto 10px}
+.book{padding:10px;border-radius:8px;border:2px solid #e8c36a;color:#fff;font-weight:bold;background:linear-gradient(90deg,#073777,#145eb7);box-shadow:0 4px 0 #03204c}
+.auth-slogan{font-size:23px;font-weight:bold;line-height:1.7;color:#fff}.auth-slogan span{color:#ffdc79}
+.auth-card{background:#fff;color:#10234c;border-radius:25px;padding:25px;width:100%;max-width:470px;margin:auto;box-shadow:0 15px 40px #00143c66;border:3px solid #f4d276}
+.auth-card h1{text-align:center;font-size:27px;margin:0 0 8px;color:#10285b}
+.subtitle{text-align:center;color:#526487;margin:0 0 20px;line-height:1.7}
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.auth-tab{padding:12px;border:1px solid #174eaa;border-radius:12px;background:#fff;color:#174eaa;font-weight:bold}
+.auth-tab.active{color:white;background:#1252b6}
+.auth-field{margin:13px 0}.auth-field label{display:block;margin-bottom:7px;font-weight:bold;color:#1b315e}
+.auth-field input,.auth-field select{width:100%;padding:13px;border:1px solid #cbd5e8;border-radius:12px;background:#f8faff;color:#10234c;outline:none;min-width:0}
+.phone-row{display:grid;grid-template-columns:115px 1fr;gap:8px;direction:ltr}
+.forgot-row{text-align:left;margin:12px 0}.forgot-row button{background:none;border:0;color:#1455b5;text-decoration:underline;font-weight:bold}
+.primary-auth{width:100%;padding:15px;border:0;border-radius:14px;background:linear-gradient(90deg,#ffdc69,#f5ae19);color:#182449;font-weight:bold;font-size:17px;margin-top:8px}
+.google-auth{width:100%;padding:13px;margin-top:13px;border:1px solid #cbd5e8;border-radius:14px;background:#fff;color:#263957;font-weight:bold}
+.google-g{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:50%;color:#4285f4;font-size:22px;font-weight:bold;margin-inline-end:8px}
+.divider{display:flex;align-items:center;gap:10px;color:#71809d;margin:15px 0}.divider:before,.divider:after{content:"";height:1px;background:#d9e0ed;flex:1}
+.auth-message{min-height:22px;text-align:center;color:#b02b36;font-size:13px;margin-top:10px;line-height:1.5}
+.auth-footer{text-align:center;color:#174eaa;font-size:13px;margin-top:17px}
+
+/* المنصة الأصلية */
+#platform{display:none}
+header{width:100%;padding:16px 12px;background:#0b1c38;border-bottom:1px solid #c9a34d;text-align:center}
 .logo{color:#f2c76b;font-size:25px;font-weight:bold;margin-bottom:12px}
-.interface-box{max-width:100%;margin:auto}
-.interface-box label{display:block;margin-bottom:7px}
-.interface-box select{
- width:100%;max-width:320px;padding:12px;
- border-radius:10px;background:#142b50;color:white;
- border:1px solid #d5ae55
-}
+.interface-box{max-width:100%;margin:auto}.interface-box label{display:block;margin-bottom:7px}
+.interface-box select{width:100%;max-width:320px;padding:12px;border-radius:10px;background:#142b50;color:white;border:1px solid #d5ae55}
 main{width:100%;max-width:850px;margin:auto;padding:15px}
-.language-universe,.al-level-page,.learn-page{
- width:100%;max-width:100%;text-align:center;
- padding:25px 12px;background:#0b1933;
- border:1px solid #263e65;border-radius:18px;margin:15px auto
-}
-.language-globe{
- width:245px;height:245px;max-width:85vw;max-height:85vw;
- margin:25px auto;border-radius:50%;position:relative;
- overflow:hidden;display:grid;place-items:center;
- background:radial-gradient(circle at 30% 25%,#75d9ff,#2478b8 35%,#102e68 72%,#061329);
- box-shadow:0 0 25px #28a9ff88,inset -18px -12px 35px #02091c;
- animation:globeFloat 4s ease-in-out infinite
-}
-.language-globe:before{
- content:"";position:absolute;inset:0;border-radius:50%;
- background:
- repeating-linear-gradient(90deg,transparent 0 38px,#a7eaff55 39px 40px),
- repeating-linear-gradient(0deg,transparent 0 38px,#a7eaff44 39px 40px);
- transform:scaleX(.65);animation:globeSpin 12s linear infinite
-}
-.language-globe:after{
- content:"";position:absolute;width:75%;height:100%;
- border:2px solid #a9eaff66;border-radius:50%
-}
-.globe-names{
- position:relative;z-index:2;display:grid;
- grid-template-columns:repeat(3,auto);gap:8px 4px;
- padding:8px;direction:ltr
-}
-.globe-names span{
- font-size:9px;font-weight:bold;color:white;
- background:#061b3ddd;border:1px solid #9ce5ff88;
- border-radius:12px;padding:4px;white-space:nowrap
-}
-@keyframes globeFloat{
- 0%,100%{transform:translateY(0)}
- 50%{transform:translateY(-8px)}
-}
-@keyframes globeSpin{
- to{background-position:80px 0,0 80px}
-}
-.al-language-buttons,.al-level-buttons,.learn-skills{
- display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
- gap:10px;margin-top:20px
-}
-.al-language-buttons button,.al-level-buttons button,
-.back-button,.skill-button,.lesson-button{
- width:100%;min-width:0;padding:14px 5px;
- border:1px solid #d5ae55;border-radius:12px;
- color:white;background:#142b50;font-size:14px;cursor:pointer
-}
-button:active{background:#a77c2c}
+.language-universe,.al-level-page,.learn-page{width:100%;max-width:100%;text-align:center;padding:25px 12px;background:#0b1933;border:1px solid #263e65;border-radius:18px;margin:15px auto}
+.language-globe{width:245px;height:245px;max-width:85vw;max-height:85vw;margin:25px auto;border-radius:50%;position:relative;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#75d9ff,#2478b8 35%,#102e68 72%,#061329);box-shadow:0 0 25px #28a9ff88,inset -18px -12px 35px #02091c;animation:globeFloat 4s ease-in-out infinite}
+.language-globe:before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-linear-gradient(90deg,transparent 0 38px,#a7eaff55 39px 40px),repeating-linear-gradient(0deg,transparent 0 38px,#a7eaff44 39px 40px);transform:scaleX(.65);animation:globeSpin 12s linear infinite}
+.language-globe:after{content:"";position:absolute;width:75%;height:100%;border:2px solid #a9eaff66;border-radius:50%}
+.globe-names{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,auto);gap:8px 4px;padding:8px;direction:ltr}
+.globe-names span{font-size:9px;font-weight:bold;color:white;background:#061b3ddd;border:1px solid #9ce5ff88;border-radius:12px;padding:4px;white-space:nowrap}
+@keyframes globeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes globeSpin{to{background-position:80px 0,0 80px}}
+.al-language-buttons,.al-level-buttons,.learn-skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px}
+.al-language-buttons button,.al-level-buttons button,.back-button,.skill-button,.lesson-button{width:100%;min-width:0;padding:14px 5px;border:1px solid #d5ae55;border-radius:12px;color:white;background:#142b50;font-size:14px;cursor:pointer}
 .al-level-page,.learn-page{display:none}
-.al-level-buttons strong{
- display:block;font-size:21px;color:#f2c76b;margin-bottom:5px
-}
-#al-selected-language,#learn-language{
- color:#f2c76b;font-weight:bold
-}
+.al-level-buttons strong{display:block;font-size:21px;color:#f2c76b;margin-bottom:5px}
+#al-selected-language,#learn-language{color:#f2c76b;font-weight:bold}
 #al-choice-result{margin-top:20px;color:#f2c76b;line-height:1.8}
-.learn-heading{color:#f2c76b}
-.learn-skills{grid-template-columns:repeat(2,minmax(0,1fr))}
-.skill-button{
- min-height:100px;font-size:16px;
- display:flex;flex-direction:column;align-items:center;
- justify-content:center;gap:8px
-}
-.skill-button span{font-size:27px}
-.skill-button.active{background:#9a712b;border-color:#ffe09a}
-.lesson-area{
- margin-top:24px;padding:16px;
- background:#071329;border:1px solid #344d70;
- border-radius:14px;text-align:start
-}
+.learn-heading{color:#f2c76b}.learn-skills{grid-template-columns:repeat(2,minmax(0,1fr))}
+.skill-button{min-height:100px;font-size:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.skill-button span{font-size:27px}.skill-button.active{background:#9a712b;border-color:#ffe09a}
+.lesson-area{margin-top:24px;padding:16px;background:#071329;border:1px solid #344d70;border-radius:14px;text-align:start}
 .lesson-area h3{text-align:center;color:#f2c76b}
-.lesson-button{
- display:block;text-align:start;margin:10px 0;
- padding:13px;background:#142b50
-}
+.lesson-button{display:block;text-align:start;margin:10px 0;padding:13px;background:#142b50}
 .lesson-button small{display:block;color:#c2cce0;margin-top:5px}
 .learn-back{margin-top:20px}
-@media(max-width:360px){
- .globe-names{gap:5px 3px}
- .globe-names span{font-size:8px;padding:3px}
-}
+.logout-button{margin-top:12px;padding:9px 15px;border:1px solid #d5ae55;border-radius:10px;background:#142b50;color:white}
+@media(max-width:700px){.auth-layout{grid-template-columns:1fr;gap:10px;margin-top:18px}.auth-art{padding:5px}.auth-art h2{font-size:23px}.art-world{width:220px;height:220px}.art-earth{font-size:100px}.art-owl{font-size:75px}.book-stack{max-width:240px;margin-top:25px}.auth-slogan{font-size:19px}.auth-card{padding:20px 16px}}
+@media(max-width:360px){.globe-names{gap:5px 3px}.globe-names span{font-size:8px;padding:3px}.phone-row{grid-template-columns:100px 1fr}}
 </style>
 </head>
-
 <body>
 
+<section class="auth-page" id="auth-page">
+ <div class="auth-top">
+  <div class="auth-logo">ALMONTA<span>Λ</span>ZEM</div>
+  <div style="color:#fff">🌐 Learn • Translate • Connect</div>
+ </div>
+ <div class="auth-layout">
+  <div class="auth-art">
+   <h2>🌍 عالم اللغات والترجمة</h2>
+   <div class="tagline">Learn • Translate • Connect</div>
+   <div class="art-world">
+    <div class="art-earth">🌍</div>
+    <div class="speech one">Hello!</div><div class="speech two">Bonjour!</div><div class="speech three">Hola!</div>
+    <div class="art-owl">🦉</div>
+   </div>
+   <div class="book-stack">
+    <div class="book">🇬🇧 English</div><div class="book">🇪🇸 Español</div><div class="book">🇫🇷 Français</div><div class="book">🇩🇪 Deutsch</div>
+   </div>
+   <div class="auth-slogan">تعلم اللغات...<br><span>واكتشف العالم</span></div>
+  </div>
+
+  <div class="auth-card">
+   <h1>مرحباً بك في</h1><h1>ALMONTAΛZEM</h1>
+   <p class="subtitle">منصتك لتعلم اللغات والترجمة بسهولة</p>
+   <div class="auth-tabs">
+    <button class="auth-tab active" id="signup-tab" type="button" onclick="setAuthMode('signup')">إنشاء حساب جديد</button>
+    <button class="auth-tab" id="login-tab" type="button" onclick="setAuthMode('login')">تسجيل الدخول</button>
+   </div>
+   <form id="auth-form" onsubmit="submitAuth(event)">
+    <div class="auth-field" id="name-field"><label for="user-name">الاسم</label><input id="user-name" type="text" placeholder="اكتب اسمك" autocomplete="name"></div>
+    <div class="auth-field"><label for="user-email">البريد الإلكتروني</label><input id="user-email" type="email" placeholder="example@email.com" required autocomplete="email"></div>
+    <div class="auth-field"><label for="user-password">كلمة المرور</label><input id="user-password" type="password" placeholder="اكتب كلمة المرور" required minlength="6" autocomplete="current-password"></div>
+    <div class="auth-field" id="phone-field">
+     <label for="user-phone">رقم الهاتف</label>
+     <div class="phone-row">
+      <select id="country-code" aria-label="كود الدولة">
+       <option value="+20">🇪🇬 +20</option><option value="+966">🇸🇦 +966</option><option value="+971">🇦🇪 +971</option><option value="+965">🇰🇼 +965</option><option value="+974">🇶🇦 +974</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option><option value="+49">🇩🇪 +49</option><option value="+34">🇪🇸 +34</option><option value="+39">🇮🇹 +39</option><option value="+90">🇹🇷 +90</option><option value="+81">🇯🇵 +81</option><option value="+86">🇨🇳 +86</option>
+      </select>
+      <input id="user-phone" type="tel" placeholder="رقم الهاتف" autocomplete="tel">
+     </div>
+    </div>
+    <div class="forgot-row hidden" id="forgot-row"><button type="button" onclick="forgotPassword()">هل نسيت كلمة المرور؟</button></div>
+    <button class="primary-auth" id="submit-auth" type="submit">إنشاء حساب جديد</button>
+   </form>
+   <div class="divider">أو</div>
+   <button class="google-auth" type="button" onclick="googleSignIn()"><span class="google-g">G</span>التسجيل عبر حساب Google</button>
+   <div class="auth-message" id="auth-message"></div>
+   <div class="auth-footer">Learn • Translate • Connect 🌍</div>
+  </div>
+ </div>
+</section>
+
+<div id="platform">
 <header>
  <div class="logo">ALMONTAΛZEM</div>
  <div class="interface-box">
   <label for="interfaceLanguage">🌐 Interface Language</label>
   <select id="interfaceLanguage" onchange="changeInterface(this.value)">
-   <option value="ar">العربية</option>
-   <option value="en">English</option>
-   <option value="zh">中文</option>
-   <option value="fr">Français</option>
-   <option value="de">Deutsch</option>
-   <option value="es">Español</option>
-   <option value="it">Italiano</option>
-   <option value="ru">Русский</option>
-   <option value="ja">日本語</option>
-   <option value="tr">Türkçe</option>
-   <option value="pt">Português</option>
-   <option value="hi">हिन्दी</option>
-   <option value="ko">한국어</option>
+   <option value="ar">العربية</option><option value="en">English</option><option value="zh">中文</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option><option value="it">Italiano</option><option value="ru">Русский</option><option value="ja">日本語</option><option value="tr">Türkçe</option><option value="pt">Português</option><option value="hi">हिन्दी</option><option value="ko">한국어</option>
   </select>
  </div>
+ <button class="logout-button" onclick="logout()">تسجيل الخروج</button>
 </header>
-
 <main>
-
 <section class="language-universe" id="al-universe">
- <h2 id="main-title">🌍 عالم اللغات</h2>
- <p id="main-description">عالم واحد، لغات كثيرة</p>
-
- <div class="language-globe">
-  <div class="globe-names">
-   <span>العربية</span><span>ENGLISH</span>
-   <span>ESPAÑOL</span><span>FRANÇAIS</span>
-   <span>DEUTSCH</span><span>中文</span>
-   <span>ITALIANO</span><span>РУССКИЙ</span>
-   <span>日本語</span><span>TÜRKÇE</span>
-   <span>PORTUGUÊS</span><span>हिन्दी</span>
-   <span>한국어</span>
-  </div>
- </div>
-
+ <h2 id="main-title">🌍 عالم اللغات</h2><p id="main-description">عالم واحد، لغات كثيرة</p>
+ <div class="language-globe"><div class="globe-names">
+  <span>العربية</span><span>ENGLISH</span><span>ESPAÑOL</span><span>FRANÇAIS</span><span>DEUTSCH</span><span>中文</span><span>ITALIANO</span><span>РУССКИЙ</span><span>日本語</span><span>TÜRKÇE</span><span>PORTUGUÊS</span><span>हिन्दी</span><span>한국어</span>
+ </div></div>
  <h3 id="choose-language-title">اختر اللغة التي تريد تعلمها</h3>
-
  <div class="al-language-buttons">
-  <button onclick="alChooseLanguage('English')">🇬🇧 English</button>
-  <button onclick="alChooseLanguage('Spanish')">🇪🇸 Spanish</button>
-  <button onclick="alChooseLanguage('French')">🇫🇷 French</button>
-  <button onclick="alChooseLanguage('German')">🇩🇪 German</button>
-  <button onclick="alChooseLanguage('Italian')">🇮🇹 Italian</button>
-  <button onclick="alChooseLanguage('Arabic')">🇪🇬 Arabic</button>
-  <button onclick="alChooseLanguage('Chinese')">🇨🇳 Chinese</button>
-  <button onclick="alChooseLanguage('Japanese')">🇯🇵 Japanese</button>
-  <button onclick="alChooseLanguage('Turkish')">🇹🇷 Turkish</button>
-  <button onclick="alChooseLanguage('Russian')">🇷🇺 Russian</button>
+  <button onclick="alChooseLanguage('English')">🇬🇧 English</button><button onclick="alChooseLanguage('Spanish')">🇪🇸 Spanish</button><button onclick="alChooseLanguage('French')">🇫🇷 French</button><button onclick="alChooseLanguage('German')">🇩🇪 German</button><button onclick="alChooseLanguage('Italian')">🇮🇹 Italian</button><button onclick="alChooseLanguage('Arabic')">🇪🇬 Arabic</button><button onclick="alChooseLanguage('Chinese')">🇨🇳 Chinese</button><button onclick="alChooseLanguage('Japanese')">🇯🇵 Japanese</button><button onclick="alChooseLanguage('Turkish')">🇹🇷 Turkish</button><button onclick="alChooseLanguage('Russian')">🇷🇺 Russian</button>
  </div>
 </section>
 
 <section class="al-level-page" id="al-level-page">
- <h2 id="level-title">Choose Your Level</h2>
- <p id="learning-language-label">لغة التعلم:</p>
- <p><span id="al-selected-language"></span></p>
- <p id="level-description">اختر مستواك</p>
-
+ <h2 id="level-title">Choose Your Level</h2><p id="learning-language-label">لغة التعلم:</p><p><span id="al-selected-language"></span></p><p id="level-description">اختر مستواك</p>
  <div class="al-level-buttons">
-  <button onclick="alChooseLevel('A1','Beginner')"><strong>A1</strong>Beginner</button>
-  <button onclick="alChooseLevel('A2','Elementary')"><strong>A2</strong>Elementary</button>
-  <button onclick="alChooseLevel('B1','Intermediate')"><strong>B1</strong>Intermediate</button>
-  <button onclick="alChooseLevel('B2','Upper Intermediate')"><strong>B2</strong>Upper Intermediate</button>
-  <button onclick="alChooseLevel('C1','Advanced')"><strong>C1</strong>Advanced</button>
-  <button onclick="alChooseLevel('C2','Proficiency')"><strong>C2</strong>Proficiency</button>
+  <button onclick="alChooseLevel('A1','Beginner')"><strong>A1</strong>Beginner</button><button onclick="alChooseLevel('A2','Elementary')"><strong>A2</strong>Elementary</button><button onclick="alChooseLevel('B1','Intermediate')"><strong>B1</strong>Intermediate</button><button onclick="alChooseLevel('B2','Upper Intermediate')"><strong>B2</strong>Upper Intermediate</button><button onclick="alChooseLevel('C1','Advanced')"><strong>C1</strong>Advanced</button><button onclick="alChooseLevel('C2','Proficiency')"><strong>C2</strong>Proficiency</button>
  </div>
-
- <div id="al-choice-result"></div>
- <br>
- <button class="back-button" onclick="alGoBack()">← Back to Languages</button>
+ <div id="al-choice-result"></div><br><button class="back-button" onclick="alGoBack()">← Back to Languages</button>
 </section>
 
-<!-- LEARN SECTION -->
 <section class="learn-page" id="learn-page">
  <h2 class="learn-heading">📚 LEARN</h2>
- <p>Learning Language: <span id="learn-language"></span></p>
- <p>Your Level: <strong id="learn-level" style="color:#f2c76b"></strong></p>
- <p>Choose a skill to start learning</p>
-
+ <p>Learning Language: <span id="learn-language"></span></p><p>Your Level: <strong id="learn-level" style="color:#f2c76b"></strong></p><p>Choose a skill to start learning</p>
  <div class="learn-skills">
-  <button class="skill-button active" onclick="showSkill('vocabulary',this)">
-   <span>📚</span>Vocabulary
-  </button>
-  <button class="skill-button" onclick="showSkill('grammar',this)">
-   <span>📝</span>Grammar
-  </button>
-  <button class="skill-button" onclick="showSkill('reading',this)">
-   <span>📖</span>Reading
-  </button>
-  <button class="skill-button" onclick="showSkill('listening',this)">
-   <span>🎧</span>Listening
-  </button>
-  <button class="skill-button" onclick="showSkill('writing',this)">
-   <span>✍️</span>Writing
-  </button>
-  <button class="skill-button" onclick="showSkill('speaking',this)">
-   <span>🗣️</span>Speaking
-  </button>
+  <button class="skill-button active" onclick="showSkill('vocabulary',this)"><span>📚</span>Vocabulary</button><button class="skill-button" onclick="showSkill('grammar',this)"><span>📝</span>Grammar</button><button class="skill-button" onclick="showSkill('reading',this)"><span>📖</span>Reading</button><button class="skill-button" onclick="showSkill('listening',this)"><span>🎧</span>Listening</button><button class="skill-button" onclick="showSkill('writing',this)"><span>✍️</span>Writing</button><button class="skill-button" onclick="showSkill('speaking',this)"><span>🗣️</span>Speaking</button>
  </div>
-
- <div class="lesson-area" id="lesson-area">
-  <h3>Vocabulary Lessons</h3>
-  <div id="lesson-list"></div>
- </div>
-
- <button class="back-button learn-back" onclick="backToLevels()">
-  ← Back to Levels
- </button>
+ <div class="lesson-area" id="lesson-area"><h3>Vocabulary Lessons</h3><div id="lesson-list"></div></div>
+ <button class="back-button learn-back" onclick="backToLevels()">← Back to Levels</button>
 </section>
-
 </main>
+</div>
 
 <script>
-let alLearningLanguage="";
-let alLearningLevel="";
+/* ملاحظة: هذه واجهة تجريبية. تسجيل الحساب وGoogle واستعادة كلمة المرور
+   تحتاج لاحقاً إلى ربط خدمة مصادقة مثل Firebase. */
+let authMode="signup";
+function setAuthMode(mode){
+ authMode=mode;const signup=mode==="signup";
+ document.getElementById("signup-tab").classList.toggle("active",signup);
+ document.getElementById("login-tab").classList.toggle("active",!signup);
+ document.getElementById("name-field").classList.toggle("hidden",!signup);
+ document.getElementById("phone-field").classList.toggle("hidden",!signup);
+ document.getElementById("forgot-row").classList.toggle("hidden",signup);
+ document.getElementById("submit-auth").textContent=signup?"إنشاء حساب جديد":"تسجيل الدخول";
+ document.getElementById("auth-message").textContent="";
+}
+function submitAuth(event){
+ event.preventDefault();
+ const email=document.getElementById("user-email").value.trim();
+ const password=document.getElementById("user-password").value;
+ const name=document.getElementById("user-name").value.trim();
+ const message=document.getElementById("auth-message");
+ if(authMode==="signup"&&!name){message.textContent="من فضلك اكتب اسمك.";return}
+ if(!email||!password){message.textContent="أكمل البيانات المطلوبة.";return}
+ message.style.color="#187443";
+ message.textContent="واجهة تجريبية: تم إدخال البيانات، لكن الحساب لم يُنشأ فعلياً بعد.";
+ setTimeout(enterPlatform,900);
+}
+function googleSignIn(){
+ const m=document.getElementById("auth-message");
+ m.style.color="#b02b36";
+ m.textContent="زر Google جاهز شكلياً، ويحتاج ربط Firebase لتفعيل تسجيل الدخول الحقيقي.";
+}
+function forgotPassword(){
+ const m=document.getElementById("auth-message");
+ m.style.color="#174eaa";
+ m.textContent="استعادة كلمة المرور تحتاج ربط خدمة الحسابات وإرسال بريد إلكتروني.";
+}
+function enterPlatform(){
+ document.getElementById("auth-page").style.display="none";
+ document.getElementById("platform").style.display="block";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function logout(){
+ document.getElementById("platform").style.display="none";
+ document.getElementById("auth-page").style.display="block";
+ setAuthMode("login");window.scrollTo({top:0,behavior:"smooth"});
+}
 
+let alLearningLanguage="",alLearningLevel="";
 const interfaceTexts={
  ar:["🌍 عالم اللغات","عالم واحد، لغات كثيرة","اختر اللغة التي تريد تعلمها","اختر مستواك","لغة التعلم:"],
  en:["🌍 Language World","One World, Many Languages","Choose Your Language","Choose Your Level","Learning language:"],
@@ -248,27 +233,24 @@ const interfaceTexts={
  de:["🌍 Sprachwelt","Eine Welt, viele Sprachen","Wähle deine Sprache","Wähle dein Niveau","Lernsprache:"],
  it:["🌍 Mondo delle lingue","Un mondo, tante lingue","Scegli la tua lingua","Scegli il tuo livello","Lingua da imparare:"],
  zh:["🌍 语言世界","一个世界，多种语言","选择你的语言","选择你的水平","学习语言："],
- ru:["🌍 Мир языков","Один мир, много языков","Выберите язык","Выберите уровень","Язык обучения:"],
+ ru:["🌍 Мир языков","Один мир, много языков","Выберите язык","Выберите уровень","Язык обучения："],
  ja:["🌍 言語の世界","一つの世界、多くの言語","学ぶ言語を選択","レベルを選択","学習言語："],
  tr:["🌍 Dil Dünyası","Tek dünya, birçok dil","Dilini seç","Seviyeni seç","Öğrenilen dil:"],
  pt:["🌍 Mundo dos idiomas","Um mundo, muitas línguas","Escolha seu idioma","Escolha seu nível","Idioma de aprendizagem:"],
  hi:["🌍 भाषाओं की दुनिया","एक दुनिया, कई भाषाएँ","अपनी भाषा चुनें","अपना स्तर चुनें","सीखने की भाषा:"],
  ko:["🌍 언어의 세계","하나의 세계, 다양한 언어","배울 언어 선택","레벨 선택","학습 언어:"]
 };
-
 function changeInterface(lang){
  const t=interfaceTexts[lang]||interfaceTexts.en;
- document.documentElement.lang=lang;
- document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
  document.getElementById("main-title").textContent=t[0];
  document.getElementById("main-description").textContent=t[1];
  document.getElementById("choose-language-title").textContent=t[2];
  document.getElementById("level-title").textContent=t[3];
  document.getElementById("learning-language-label").textContent=t[4];
  document.getElementById("level-description").textContent=t[3];
- localStorage.setItem("alInterfaceLanguage",lang);
+ try{localStorage.setItem("alInterfaceLanguage",lang)}catch(e){}
 }
-
 function alChooseLanguage(language){
  alLearningLanguage=language;
  document.getElementById("al-selected-language").textContent=language;
@@ -277,7 +259,6 @@ function alChooseLanguage(language){
  document.getElementById("al-choice-result").textContent="";
  document.getElementById("al-level-page").scrollIntoView({behavior:"smooth"});
 }
-
 function alChooseLevel(level,name){
  alLearningLevel=level;
  document.getElementById("learn-language").textContent=alLearningLanguage;
@@ -287,7 +268,6 @@ function alChooseLevel(level,name){
  showSkill("vocabulary",document.querySelector(".skill-button"));
  document.getElementById("learn-page").scrollIntoView({behavior:"smooth"});
 }
-
 const skillLessons={
  vocabulary:["Basic Words","Everyday Vocabulary","People and Places","Food and Daily Life"],
  grammar:["Basic Grammar","Sentence Structure","Verbs and Tenses","Questions and Negatives"],
@@ -296,61 +276,45 @@ const skillLessons={
  writing:["Writing Basic Sentences","Building Paragraphs","Everyday Messages"],
  speaking:["Introducing Yourself","Daily Conversations","Asking and Answering Questions"]
 };
-
-const skillTitles={
- vocabulary:"Vocabulary Lessons",
- grammar:"Grammar Lessons",
- reading:"Reading Lessons",
- listening:"Listening Lessons",
- writing:"Writing Lessons",
- speaking:"Speaking Lessons"
-};
-
+const skillTitles={vocabulary:"Vocabulary Lessons",grammar:"Grammar Lessons",reading:"Reading Lessons",listening:"Listening Lessons",writing:"Writing Lessons",speaking:"Speaking Lessons"};
 function showSkill(skill,button){
  document.querySelectorAll(".skill-button").forEach(b=>b.classList.remove("active"));
  if(button)button.classList.add("active");
-
  document.querySelector("#lesson-area h3").textContent=skillTitles[skill];
- const list=document.getElementById("lesson-list");
- list.innerHTML="";
-
+ const list=document.getElementById("lesson-list");list.innerHTML="";
  skillLessons[skill].forEach((lesson,index)=>{
-  const item=document.createElement("button");
-  item.className="lesson-button";
-  item.innerHTML="Lesson "+(index+1)+": "+lesson+
-   "<small>"+alLearningLanguage+" • "+alLearningLevel+"</small>";
-  item.onclick=()=>showLessonMessage(lesson,skill,index+1);
-  list.appendChild(item);
+  const item=document.createElement("button");item.className="lesson-button";
+  item.innerHTML="Lesson "+(index+1)+": "+lesson+"<small>"+alLearningLanguage+" • "+alLearningLevel+"</small>";
+  item.onclick=()=>showLessonMessage(lesson,skill,index+1);list.appendChild(item);
  });
 }
-
 function showLessonMessage(lesson,skill,number){
- document.getElementById("lesson-list").innerHTML=
-  "<p style='color:#f2c76b'>"+lesson+"</p>"+
-  "<p>This lesson is ready to be developed with learning content and exercises.</p>"+
-  "<p>Language: "+alLearningLanguage+"</p>"+
-  "<p>Level: "+alLearningLevel+"</p>"+
-  "<button class='back-button' onclick=\"showSkill('"+skill+"',document.querySelector('.skill-button.active'))\">← Back to lessons</button>";
+ const list=document.getElementById("lesson-list");list.innerHTML="";
+ const title=document.createElement("p");title.style.color="#f2c76b";title.textContent=lesson;
+ const info=document.createElement("p");info.textContent="محتوى الدرس والتمارين سيتم إضافته في مرحلة بناء الدروس.";
+ const lang=document.createElement("p");lang.textContent="Language: "+alLearningLanguage+" | Level: "+alLearningLevel;
+ const back=document.createElement("button");back.className="back-button";back.textContent="← Back to lessons";
+ back.onclick=()=>showSkill(skill,document.querySelector(".skill-button.active"));
+ list.append(title,info,lang,back);
 }
-
 function alGoBack(){
  document.getElementById("al-level-page").style.display="none";
  document.getElementById("al-universe").style.display="block";
  document.getElementById("al-universe").scrollIntoView({behavior:"smooth"});
 }
-
 function backToLevels(){
  document.getElementById("learn-page").style.display="none";
  document.getElementById("al-level-page").style.display="block";
  document.getElementById("al-level-page").scrollIntoView({behavior:"smooth"});
 }
-
-const savedLanguage=localStorage.getItem("alInterfaceLanguage");
-if(savedLanguage&&interfaceTexts[savedLanguage]){
- document.getElementById("interfaceLanguage").value=savedLanguage;
- changeInterface(savedLanguage);
-}
+try{
+ const savedLanguage=localStorage.getItem("alInterfaceLanguage");
+ if(savedLanguage&&interfaceTexts[savedLanguage]){
+  document.getElementById("interfaceLanguage").value=savedLanguage;
+  changeInterface(savedLanguage);
+ }
+}catch(e){}
 </script>
-
 </body>
 </html>
+
