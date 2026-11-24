@@ -4,7 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LANGORA | تعلم لغات العالم</title>
+<meta name="theme-color" content="#0b142b">
+<title>ALMONTΛZEM | Language Learning</title>
+
 <style>
 *{box-sizing:border-box}
 body{
@@ -14,24 +16,41 @@ body{
  color:white;
 }
 header{
- padding:22px;
  display:flex;
  justify-content:space-between;
  align-items:center;
+ flex-wrap:wrap;
+ gap:15px;
+ padding:20px;
  background:#111e3d;
- border-bottom:1px solid #26385f;
+ border-bottom:1px solid #29395d;
 }
-.logo{color:#e6c46a;font-size:25px;font-weight:bold}
-header span{color:#cbd5e1;font-size:14px}
+.logo{
+ color:#e6c46a;
+ font-size:25px;
+ font-weight:bold;
+ letter-spacing:1px;
+}
+select{
+ background:#1b2b4d;
+ color:white;
+ border:1px solid #526487;
+ border-radius:10px;
+ padding:12px;
+ font-size:15px;
+}
 main{
- max-width:950px;
+ max-width:1000px;
  margin:auto;
  padding:45px 18px;
  text-align:center;
 }
-h1{font-size:34px;margin-bottom:12px}
-.description{color:#bdc9df;line-height:1.8}
-.section-title{margin-top:38px;font-size:22px}
+h1{font-size:34px;color:#e6c46a}
+.description{
+ color:#c4cde0;
+ line-height:1.9;
+}
+.section-title{margin-top:38px}
 .languages{
  display:grid;
  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
@@ -42,20 +61,23 @@ h1{font-size:34px;margin-bottom:12px}
  background:#18294d;
  border:2px solid transparent;
  border-radius:15px;
- padding:22px 10px;
+ padding:20px 10px;
  cursor:pointer;
- font-size:17px;
+ font-size:16px;
  color:white;
 }
 .language.selected{
  border-color:#e6c46a;
  background:#253b68;
 }
-.flag{font-size:30px;display:block;margin-bottom:10px}
+.flag{
+ display:block;
+ font-size:29px;
+ margin-bottom:10px;
+}
 .levels{
- display:flex;
- justify-content:center;
- flex-wrap:wrap;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(90px,1fr));
  gap:12px;
  margin-top:20px;
 }
@@ -63,11 +85,15 @@ h1{font-size:34px;margin-bottom:12px}
  background:#18294d;
  border:2px solid transparent;
  border-radius:12px;
- padding:14px 20px;
+ padding:17px 10px;
  cursor:pointer;
  color:white;
+ font-size:17px;
 }
-.level.selected{border-color:#e6c46a}
+.level.selected{
+ border-color:#e6c46a;
+ background:#253b68;
+}
 button{
  background:#d8b653;
  color:#111e3d;
@@ -87,75 +113,262 @@ button{
  margin-top:30px;
  line-height:2;
 }
+.watermark{
+ margin-top:65px;
+ font-size:clamp(25px,7vw,65px);
+ font-weight:bold;
+ letter-spacing:3px;
+ color:rgba(230,198,106,.13);
+ user-select:none;
+}
 footer{
  text-align:center;
  color:#8292b1;
- padding:30px;
+ padding:25px;
 }
 </style>
 </head>
+
 <body>
 
 <header>
- <div class="logo">LANGORA 🌍</div>
- <span>تعلم بلا حدود</span>
+ <div class="logo">ALMONTΛZEM</div>
+
+ <select id="interfaceLanguage" aria-label="Interface language">
+  <option value="ar">🇪🇬 العربية</option>
+  <option value="en">🇬🇧 English</option>
+  <option value="zh">🇨🇳 中文</option>
+  <option value="fr">🇫🇷 Français</option>
+  <option value="de">🇩🇪 Deutsch</option>
+  <option value="es">🇪🇸 Español</option>
+  <option value="it">🇮🇹 Italiano</option>
+  <option value="ru">🇷🇺 Русский</option>
+  <option value="ja">🇯🇵 日本語</option>
+  <option value="tr">🇹🇷 Türkçe</option>
+  <option value="pt">🇵🇹 Português</option>
+  <option value="hi">🇮🇳 हिन्दी</option>
+  <option value="ko">🇰🇷 한국어</option>
+ </select>
 </header>
 
 <main>
- <h1>افتح عالمًا جديدًا مع كل لغة</h1>
- <p class="description">
- تعلم لغات العالم من الصفر حتى الاحتراف،
- وطور مهاراتك خطوة بخطوة.
+
+ <h1 data-i18n="title">تعلم لغة جديدة وافتح عالمًا جديدًا</h1>
+
+ <p class="description" data-i18n="description">
+ منصة عالمية لتعلم اللغات من الصفر حتى الاحتراف.
  </p>
 
- <h2 class="section-title">اختر اللغة التي تريد تعلمها</h2>
+ <h2 class="section-title" data-i18n="choose">اختر لغة التعلم</h2>
 
  <div class="languages">
-  <div class="language selected" data-language="الإنجليزية">
-   <span class="flag">🇬🇧</span>الإنجليزية
+  <div class="language selected" data-language="English">
+   <span class="flag">🇬🇧</span>English
   </div>
-  <div class="language" data-language="الإسبانية">
-   <span class="flag">🇪🇸</span>الإسبانية
+  <div class="language" data-language="Spanish">
+   <span class="flag">🇪🇸</span>Español
   </div>
-  <div class="language" data-language="الفرنسية">
-   <span class="flag">🇫🇷</span>الفرنسية
+  <div class="language" data-language="French">
+   <span class="flag">🇫🇷</span>Français
   </div>
-  <div class="language" data-language="الألمانية">
-   <span class="flag">🇩🇪</span>الألمانية
+  <div class="language" data-language="German">
+   <span class="flag">🇩🇪</span>Deutsch
   </div>
-  <div class="language" data-language="الإيطالية">
-   <span class="flag">🇮🇹</span>الإيطالية
+  <div class="language" data-language="Italian">
+   <span class="flag">🇮🇹</span>Italiano
   </div>
-  <div class="language" data-language="العربية">
+  <div class="language" data-language="Arabic">
    <span class="flag">🇪🇬</span>العربية
   </div>
+  <div class="language" data-language="Chinese">
+   <span class="flag">🇨🇳</span>中文
+  </div>
+  <div class="language" data-language="Japanese">
+   <span class="flag">🇯🇵</span>日本語
+  </div>
+  <div class="language" data-language="Turkish">
+   <span class="flag">🇹🇷</span>Türkçe
+  </div>
+  <div class="language" data-language="Russian">
+   <span class="flag">🇷🇺</span>Русский
+  </div>
  </div>
 
- <h2 class="section-title">حدد مستواك</h2>
+ <h2 class="section-title" data-i18n="level">اختر مستواك</h2>
 
  <div class="levels">
-  <div class="level selected" data-level="مبتدئ">مبتدئ A1</div>
-  <div class="level" data-level="متوسط">متوسط B1</div>
-  <div class="level" data-level="متقدم">متقدم C1</div>
+  <div class="level selected" data-level="A1">A1</div>
+  <div class="level" data-level="A2">A2</div>
+  <div class="level" data-level="B1">B1</div>
+  <div class="level" data-level="B2">B2</div>
+  <div class="level" data-level="C1">C1</div>
+  <div class="level" data-level="C2">C2</div>
  </div>
 
- <button onclick="startLearning()">ابدأ التعلم الآن ←</button>
+ <button onclick="startLearning()" data-i18n="start">
+  ابدأ التعلم الآن ←
+ </button>
 
  <div id="result">
-  <h2>🎉 رحلتك بدأت!</h2>
+  <h2 data-i18n="success">🎉 اختيارك جاهز!</h2>
   <p id="courseInfo"></p>
-  <h3>الدرس الأول: مرحبًا بالعالم</h3>
-  <p>قريبًا ستجد هنا دروسًا تفاعلية وتمارين واختبارات.</p>
+  <p data-i18n="coming">
+   سيتم إضافة الدروس التفاعلية والاختبارات قريبًا.
+  </p>
  </div>
+
+ <div class="watermark">ALMONTΛZEM</div>
+
 </main>
 
 <footer>
- LANGORA © 2026 — Learn Every Language. Unlock Every World.
+ ALMONTΛZEM © 2026
 </footer>
 
 <script>
-let selectedLanguage="الإنجليزية";
-let selectedLevel="مبتدئ";
+const translations={
+ ar:{
+  title:"تعلم لغة جديدة وافتح عالمًا جديدًا",
+  description:"منصة عالمية لتعلم اللغات من الصفر حتى الاحتراف.",
+  choose:"اختر لغة التعلم",
+  level:"اختر مستواك",
+  start:"ابدأ التعلم الآن ←",
+  success:"🎉 اختيارك جاهز!",
+  coming:"سيتم إضافة الدروس التفاعلية والاختبارات قريبًا."
+ },
+ en:{
+  title:"Learn a New Language, Open a New World",
+  description:"A global platform to learn languages from beginner to advanced.",
+  choose:"Choose Your Learning Language",
+  level:"Choose Your Level",
+  start:"Start Learning Now →",
+  success:"🎉 Your Selection Is Ready!",
+  coming:"Interactive lessons and tests are coming soon."
+ },
+ zh:{
+  title:"学习一门新语言，开启一个新世界",
+  description:"从初级到高级学习世界语言。",
+  choose:"选择学习语言",
+  level:"选择你的等级",
+  start:"立即开始学习 →",
+  success:"🎉 选择完成！",
+  coming:"互动课程和测试即将推出。"
+ },
+ fr:{
+  title:"Apprenez une langue, ouvrez un nouveau monde",
+  description:"Une plateforme mondiale pour apprendre les langues.",
+  choose:"Choisissez votre langue",
+  level:"Choisissez votre niveau",
+  start:"Commencer maintenant →",
+  success:"🎉 Votre choix est prêt !",
+  coming:"Les cours interactifs arrivent bientôt."
+ },
+ de:{
+  title:"Lerne eine Sprache und entdecke eine neue Welt",
+  description:"Eine globale Plattform zum Sprachenlernen.",
+  choose:"Wähle deine Lernsprache",
+  level:"Wähle dein Niveau",
+  start:"Jetzt lernen →",
+  success:"🎉 Deine Auswahl ist bereit!",
+  coming:"Interaktive Lektionen kommen bald."
+ },
+ es:{
+  title:"Aprende un idioma y descubre un nuevo mundo",
+  description:"Una plataforma global para aprender idiomas.",
+  choose:"Elige tu idioma",
+  level:"Elige tu nivel",
+  start:"Comenzar ahora →",
+  success:"🎉 ¡Tu selección está lista!",
+  coming:"Las lecciones interactivas llegarán pronto."
+ },
+ it:{
+  title:"Impara una lingua e scopri un nuovo mondo",
+  description:"Una piattaforma globale per imparare le lingue.",
+  choose:"Scegli la lingua",
+  level:"Scegli il tuo livello",
+  start:"Inizia ora →",
+  success:"🎉 La tua scelta è pronta!",
+  coming:"Le lezioni interattive arriveranno presto."
+ },
+ ru:{
+  title:"Изучай язык и открывай новый мир",
+  description:"Глобальная платформа для изучения языков.",
+  choose:"Выберите язык обучения",
+  level:"Выберите уровень",
+  start:"Начать обучение →",
+  success:"🎉 Ваш выбор готов!",
+  coming:"Интерактивные уроки скоро появятся."
+ },
+ ja:{
+  title:"新しい言語を学び、新しい世界を開こう",
+  description:"世界中の言語を学べるプラットフォーム。",
+  choose:"学習する言語を選択",
+  level:"レベルを選択",
+  start:"学習を始める →",
+  success:"🎉 選択完了！",
+  coming:"インタラクティブなレッスンは近日公開。"
+ },
+ tr:{
+  title:"Yeni bir dil öğren, yeni bir dünya keşfet",
+  description:"Dünya dillerini öğrenmek için küresel platform.",
+  choose:"Öğrenme dilini seç",
+  level:"Seviyeni seç",
+  start:"Hemen öğrenmeye başla →",
+  success:"🎉 Seçimin hazır!",
+  coming:"Etkileşimli dersler yakında."
+ },
+ pt:{
+  title:"Aprenda um idioma e descubra um novo mundo",
+  description:"Uma plataforma global para aprender idiomas.",
+  choose:"Escolha seu idioma",
+  level:"Escolha seu nível",
+  start:"Começar agora →",
+  success:"🎉 Sua escolha está pronta!",
+  coming:"Aulas interativas em breve."
+ },
+ hi:{
+  title:"एक नई भाषा सीखें, एक नई दुनिया खोलें",
+  description:"भाषाएँ सीखने का एक वैश्विक मंच।",
+  choose:"अपनी सीखने की भाषा चुनें",
+  level:"अपना स्तर चुनें",
+  start:"अभी सीखना शुरू करें →",
+  success:"🎉 आपका चयन तैयार है!",
+  coming:"इंटरैक्टिव पाठ जल्द आ रहे हैं।"
+ },
+ ko:{
+  title:"새로운 언어를 배우고 새로운 세계를 열어보세요",
+  description:"세계 언어를 배우는 글로벌 플랫폼.",
+  choose:"학습 언어 선택",
+  level:"레벨 선택",
+  start:"지금 학습 시작 →",
+  success:"🎉 선택이 완료되었습니다!",
+  coming:"인터랙티브 수업이 곧 제공됩니다."
+ }
+};
+
+let selectedLanguage="English";
+let selectedLevel="A1";
+
+const selector=document.getElementById("interfaceLanguage");
+
+function setInterface(lang){
+ const t=translations[lang]||translations.en;
+
+ document.documentElement.lang=lang;
+ document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+
+ document.querySelectorAll("[data-i18n]").forEach(el=>{
+  const key=el.dataset.i18n;
+  el.textContent=t[key];
+ });
+
+ selector.value=lang;
+ localStorage.setItem("almontazem-language",lang);
+}
+
+selector.addEventListener("change",()=>{
+ setInterface(selector.value);
+});
 
 document.querySelectorAll(".language").forEach(item=>{
  item.onclick=()=>{
@@ -174,13 +387,21 @@ document.querySelectorAll(".level").forEach(item=>{
 });
 
 function startLearning(){
- document.getElementById("courseInfo").textContent=
- "اللغة: "+selectedLanguage+" | المستوى: "+selectedLevel;
+ const lang=selector.value;
+ const info=lang==="ar"
+ ? "لغة التعلم: "+selectedLanguage+" | المستوى: "+selectedLevel
+ : lang==="zh"
+ ? "学习语言: "+selectedLanguage+" | 等级: "+selectedLevel
+ : "Learning language: "+selectedLanguage+" | Level: "+selectedLevel;
+
+ document.getElementById("courseInfo").textContent=info;
  document.getElementById("result").style.display="block";
  document.getElementById("result").scrollIntoView({behavior:"smooth"});
 }
+
+const savedLanguage=localStorage.getItem("almontazem-language")||"ar";
+setInterface(savedLanguage);
 </script>
 
 </body>
 </html>
-
