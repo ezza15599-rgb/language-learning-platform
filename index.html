@@ -1,29 +1,102 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ALMONTAZEM</title>
+
 <style>
-/* ALMONTAZEM Globe */
-.language-universe {
-  text-align: center;
-  padding: 35px 15px;
-  color: white;
-  background: #071329;
-  border-radius: 22px;
-  margin: 25px auto;
-  max-width: 850px;
+* {
+  box-sizing: border-box;
 }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background: #071329;
+  color: white;
+  font-family: Arial, sans-serif;
+  touch-action: pan-y;
+}
+
+header {
+  width: 100%;
+  padding: 16px 12px;
+  background: #0b1c38;
+  border-bottom: 1px solid #c9a34d;
+  text-align: center;
+}
+
+.logo {
+  color: #f2c76b;
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.interface-box {
+  max-width: 100%;
+  margin: auto;
+}
+
+.interface-box label {
+  display: block;
+  margin-bottom: 7px;
+}
+
+.interface-box select {
+  width: 100%;
+  max-width: 320px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #142b50;
+  color: white;
+  border: 1px solid #d5ae55;
+}
+
+main {
+  width: 100%;
+  max-width: 850px;
+  margin: auto;
+  padding: 15px;
+}
+
+.language-universe,
+.al-level-page {
+  width: 100%;
+  max-width: 100%;
+  text-align: center;
+  padding: 25px 12px;
+  background: #0b1933;
+  border: 1px solid #263e65;
+  border-radius: 18px;
+  margin: 15px auto;
+}
+
 .language-globe {
   width: 245px;
   height: 245px;
-  margin: 15px auto 30px;
+  max-width: 85vw;
+  max-height: 85vw;
+  margin: 25px auto;
   border-radius: 50%;
   position: relative;
   overflow: hidden;
   display: grid;
   place-items: center;
-  background:
-    radial-gradient(circle at 30% 25%, #75d9ff, #2478b8 35%, #102e68 72%, #061329);
+  background: radial-gradient(circle at 30% 25%, #75d9ff, #2478b8 35%, #102e68 72%, #061329);
   box-shadow: 0 0 25px #28a9ff88, inset -18px -12px 35px #02091c;
   animation: globeFloat 4s ease-in-out infinite;
 }
+
 .language-globe::before {
   content: "";
   position: absolute;
@@ -35,6 +108,7 @@
   transform: scaleX(.65);
   animation: globeSpin 12s linear infinite;
 }
+
 .language-globe::after {
   content: "";
   position: absolute;
@@ -43,82 +117,129 @@
   border: 2px solid #a9eaff66;
   border-radius: 50%;
 }
+
 .globe-names {
   position: relative;
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(3, auto);
-  gap: 9px 5px;
-  padding: 12px;
+  gap: 8px 4px;
+  padding: 8px;
   direction: ltr;
 }
+
 .globe-names span {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: bold;
   color: white;
-  background: #061b3dcc;
+  background: #061b3ddd;
   border: 1px solid #9ce5ff88;
   border-radius: 12px;
-  padding: 4px 6px;
+  padding: 4px;
   white-space: nowrap;
 }
+
 @keyframes globeFloat {
   0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-9px); }
+  50% { transform: translateY(-8px); }
 }
+
 @keyframes globeSpin {
   to { background-position: 80px 0, 0 80px; }
 }
-.al-level-page {
-  display: none;
-  padding: 25px 15px;
-  text-align: center;
-  color: white;
-  background: #0b1933;
-  border-radius: 18px;
-  margin: 20px auto;
-  max-width: 850px;
-}
-.al-language-buttons, .al-level-buttons {
+
+.al-language-buttons,
+.al-level-buttons {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(125px,1fr));
-  gap: 12px;
-  margin-top: 22px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
 }
-.al-language-buttons button, .al-level-buttons button,
-.al-back-button {
-  padding: 14px 10px;
+
+.al-language-buttons button,
+.al-level-buttons button,
+.back-button {
+  width: 100%;
+  min-width: 0;
+  padding: 14px 5px;
   border: 1px solid #d5ae55;
   border-radius: 12px;
   color: white;
   background: #142b50;
-  font-size: 15px;
+  font-size: 14px;
   cursor: pointer;
 }
-.al-language-buttons button:hover,
-.al-level-buttons button:hover,
-.al-back-button:hover {
+
+.al-language-buttons button:active,
+.al-level-buttons button:active,
+.back-button:active {
   background: #a77c2c;
 }
-.al-level-buttons button strong {
-  display: block;
-  font-size: 20px;
-  color: #f2c76b;
+
+.al-level-page {
+  display: none;
 }
+
+.al-level-buttons strong {
+  display: block;
+  font-size: 21px;
+  color: #f2c76b;
+  margin-bottom: 5px;
+}
+
 #al-selected-language {
   color: #f2c76b;
   font-weight: bold;
 }
+
 #al-choice-result {
   margin-top: 20px;
   color: #f2c76b;
-  font-size: 17px;
+  line-height: 1.8;
+}
+
+@media (max-width: 360px) {
+  .globe-names {
+    gap: 5px 3px;
+  }
+  .globe-names span {
+    font-size: 8px;
+    padding: 3px;
+  }
 }
 </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">ALMONTAΛZEM</div>
+
+  <div class="interface-box">
+    <label for="interfaceLanguage">🌐 Interface Language</label>
+    <select id="interfaceLanguage" onchange="changeInterface(this.value)">
+      <option value="ar">العربية</option>
+      <option value="en">English</option>
+      <option value="zh">中文</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="es">Español</option>
+      <option value="it">Italiano</option>
+      <option value="ru">Русский</option>
+      <option value="ja">日本語</option>
+      <option value="tr">Türkçe</option>
+      <option value="pt">Português</option>
+      <option value="hi">हिन्दी</option>
+      <option value="ko">한국어</option>
+    </select>
+  </div>
+</header>
+
+<main>
 
 <section class="language-universe" id="al-universe">
-  <h2>🌍 ALMONTAZEM</h2>
-  <p>One World. Many Languages.</p>
+  <h2 id="main-title">🌍 عالم اللغات</h2>
+  <p id="main-description">عالم واحد، لغات كثيرة</p>
 
   <div class="language-globe">
     <div class="globe-names">
@@ -138,8 +259,7 @@
     </div>
   </div>
 
-  <h3>Choose Your Language</h3>
-  <p>Select the language you want to learn</p>
+  <h3 id="choose-language-title">اختر اللغة التي تريد تعلمها</h3>
 
   <div class="al-language-buttons">
     <button onclick="alChooseLanguage('English')">🇬🇧 English</button>
@@ -156,38 +276,62 @@
 </section>
 
 <section class="al-level-page" id="al-level-page">
-  <h2>Choose Your Level</h2>
-  <p>Your learning language: <span id="al-selected-language"></span></p>
-  <p>Select your current level to continue</p>
+  <h2 id="level-title">Choose Your Level</h2>
+  <p id="learning-language-label">لغة التعلم:</p>
+  <p><span id="al-selected-language"></span></p>
+  <p id="level-description">اختر مستواك</p>
 
   <div class="al-level-buttons">
-    <button onclick="alChooseLevel('A1','Beginner')">
-      <strong>A1</strong>Beginner
-    </button>
-    <button onclick="alChooseLevel('A2','Elementary')">
-      <strong>A2</strong>Elementary
-    </button>
-    <button onclick="alChooseLevel('B1','Intermediate')">
-      <strong>B1</strong>Intermediate
-    </button>
-    <button onclick="alChooseLevel('B2','Upper Intermediate')">
-      <strong>B2</strong>Upper Intermediate
-    </button>
-    <button onclick="alChooseLevel('C1','Advanced')">
-      <strong>C1</strong>Advanced
-    </button>
-    <button onclick="alChooseLevel('C2','Proficiency')">
-      <strong>C2</strong>Proficiency
-    </button>
+    <button onclick="alChooseLevel('A1','Beginner')"><strong>A1</strong>Beginner</button>
+    <button onclick="alChooseLevel('A2','Elementary')"><strong>A2</strong>Elementary</button>
+    <button onclick="alChooseLevel('B1','Intermediate')"><strong>B1</strong>Intermediate</button>
+    <button onclick="alChooseLevel('B2','Upper Intermediate')"><strong>B2</strong>Upper Intermediate</button>
+    <button onclick="alChooseLevel('C1','Advanced')"><strong>C1</strong>Advanced</button>
+    <button onclick="alChooseLevel('C2','Proficiency')"><strong>C2</strong>Proficiency</button>
   </div>
 
   <div id="al-choice-result"></div>
   <br>
-  <button class="al-back-button" onclick="alGoBack()">← Back to Languages</button>
+  <button class="back-button" onclick="alGoBack()">← Back to Languages</button>
 </section>
+
+</main>
 
 <script>
 let alLearningLanguage = "";
+
+const interfaceTexts = {
+  ar: ["🌍 عالم اللغات","عالم واحد، لغات كثيرة","اختر اللغة التي تريد تعلمها","اختر مستواك","لغة التعلم:"],
+  en: ["🌍 Language World","One World, Many Languages","Choose Your Language","Choose Your Level","Learning language:"],
+  fr: ["🌍 Monde des langues","Un monde, plusieurs langues","Choisissez votre langue","Choisissez votre niveau","Langue étudiée :"],
+  es: ["🌍 Mundo de idiomas","Un mundo, muchos idiomas","Elige tu idioma","Elige tu nivel","Idioma de aprendizaje:"],
+  de: ["🌍 Sprachwelt","Eine Welt, viele Sprachen","Wähle deine Sprache","Wähle dein Niveau","Lernsprache:"],
+  it: ["🌍 Mondo delle lingue","Un mondo, tante lingue","Scegli la tua lingua","Scegli il tuo livello","Lingua da imparare:"],
+  zh: ["🌍 语言世界","一个世界，多种语言","选择你的语言","选择你的水平","学习语言："],
+  ru: ["🌍 Мир языков","Один мир, много языков","Выберите язык","Выберите уровень","Язык обучения:"],
+  ja: ["🌍 言語の世界","一つの世界、多くの言語","学ぶ言語を選択","レベルを選択","学習言語："],
+  tr: ["🌍 Dil Dünyası","Tek dünya, birçok dil","Dilini seç","Seviyeni seç","Öğrenilen dil:"],
+  pt: ["🌍 Mundo dos idiomas","Um mundo, muitas línguas","Escolha seu idioma","Escolha seu nível","Idioma de aprendizagem:"],
+  hi: ["🌍 भाषाओं की दुनिया","एक दुनिया, कई भाषाएँ","अपनी भाषा चुनें","अपना स्तर चुनें","सीखने की भाषा:"],
+  ko: ["🌍 언어의 세계","하나의 세계, 다양한 언어","배울 언어 선택","레벨 선택","학습 언어:"]
+};
+
+function changeInterface(lang) {
+  const t = interfaceTexts[lang] || interfaceTexts.en;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+
+  document.getElementById("main-title").textContent = t[0];
+  document.getElementById("main-description").textContent = t[1];
+  document.getElementById("choose-language-title").textContent = t[2];
+  document.getElementById("level-title").textContent = t[3];
+  document.getElementById("learning-language-label").textContent = t[4];
+
+  document.getElementById("level-description").textContent =
+    lang === "ar" ? "اختر مستواك" : t[3];
+
+  localStorage.setItem("alInterfaceLanguage", lang);
+}
 
 function alChooseLanguage(language) {
   alLearningLanguage = language;
@@ -209,4 +353,13 @@ function alGoBack() {
   document.getElementById("al-universe").style.display = "block";
   document.getElementById("al-universe").scrollIntoView({behavior:"smooth"});
 }
+
+const savedLanguage = localStorage.getItem("alInterfaceLanguage");
+if (savedLanguage && interfaceTexts[savedLanguage]) {
+  document.getElementById("interfaceLanguage").value = savedLanguage;
+  changeInterface(savedLanguage);
+}
 </script>
+
+</body>
+</html>
