@@ -1,55 +1,186 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LANGORA | تعلم اللغات</title>
+<title>LANGORA | تعلم لغات العالم</title>
 <style>
 *{box-sizing:border-box}
 body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#101c3a;
-color:white;
-text-align:center;
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#0b142b;
+ color:white;
 }
 header{
-padding:25px;
-font-size:28px;
-font-weight:bold;
-color:#e2bd61;
+ padding:22px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ background:#111e3d;
+ border-bottom:1px solid #26385f;
 }
-main{padding:55px 20px}
-h1{font-size:36px}
-p{color:#cbd5e1;line-height:1.9}
+.logo{color:#e6c46a;font-size:25px;font-weight:bold}
+header span{color:#cbd5e1;font-size:14px}
+main{
+ max-width:950px;
+ margin:auto;
+ padding:45px 18px;
+ text-align:center;
+}
+h1{font-size:34px;margin-bottom:12px}
+.description{color:#bdc9df;line-height:1.8}
+.section-title{margin-top:38px;font-size:22px}
+.languages{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+ gap:14px;
+ margin-top:20px;
+}
+.language{
+ background:#18294d;
+ border:2px solid transparent;
+ border-radius:15px;
+ padding:22px 10px;
+ cursor:pointer;
+ font-size:17px;
+ color:white;
+}
+.language.selected{
+ border-color:#e6c46a;
+ background:#253b68;
+}
+.flag{font-size:30px;display:block;margin-bottom:10px}
+.levels{
+ display:flex;
+ justify-content:center;
+ flex-wrap:wrap;
+ gap:12px;
+ margin-top:20px;
+}
+.level{
+ background:#18294d;
+ border:2px solid transparent;
+ border-radius:12px;
+ padding:14px 20px;
+ cursor:pointer;
+ color:white;
+}
+.level.selected{border-color:#e6c46a}
 button{
-background:#2855d9;
-color:white;
-border:0;
-padding:15px 30px;
-border-radius:12px;
-font-size:17px;
-margin-top:20px;
+ background:#d8b653;
+ color:#111e3d;
+ border:0;
+ padding:15px 35px;
+ border-radius:12px;
+ font-size:17px;
+ font-weight:bold;
+ cursor:pointer;
+ margin-top:30px;
 }
-.card{
-background:#1c2c50;
-padding:25px;
-border-radius:18px;
-margin:20px auto;
-max-width:400px;
+#result{
+ display:none;
+ background:#18294d;
+ padding:25px;
+ border-radius:16px;
+ margin-top:30px;
+ line-height:2;
+}
+footer{
+ text-align:center;
+ color:#8292b1;
+ padding:30px;
 }
 </style>
 </head>
 <body>
-<header>LANGORA 🌍</header>
+
+<header>
+ <div class="logo">LANGORA 🌍</div>
+ <span>تعلم بلا حدود</span>
+</header>
+
 <main>
-<h1>تعلم لغة جديدة وافتح عالمًا جديدًا</h1>
-<p>منصتك لتعلم لغات العالم من الصفر حتى الاحتراف.</p>
-<div class="card">
-<h2>ابدأ رحلتك الآن</h2>
-<p>اكتشف اللغات وطور مهاراتك كل يوم.</p>
-<button>ابدأ التعلم</button>
-</div>
+ <h1>افتح عالمًا جديدًا مع كل لغة</h1>
+ <p class="description">
+ تعلم لغات العالم من الصفر حتى الاحتراف،
+ وطور مهاراتك خطوة بخطوة.
+ </p>
+
+ <h2 class="section-title">اختر اللغة التي تريد تعلمها</h2>
+
+ <div class="languages">
+  <div class="language selected" data-language="الإنجليزية">
+   <span class="flag">🇬🇧</span>الإنجليزية
+  </div>
+  <div class="language" data-language="الإسبانية">
+   <span class="flag">🇪🇸</span>الإسبانية
+  </div>
+  <div class="language" data-language="الفرنسية">
+   <span class="flag">🇫🇷</span>الفرنسية
+  </div>
+  <div class="language" data-language="الألمانية">
+   <span class="flag">🇩🇪</span>الألمانية
+  </div>
+  <div class="language" data-language="الإيطالية">
+   <span class="flag">🇮🇹</span>الإيطالية
+  </div>
+  <div class="language" data-language="العربية">
+   <span class="flag">🇪🇬</span>العربية
+  </div>
+ </div>
+
+ <h2 class="section-title">حدد مستواك</h2>
+
+ <div class="levels">
+  <div class="level selected" data-level="مبتدئ">مبتدئ A1</div>
+  <div class="level" data-level="متوسط">متوسط B1</div>
+  <div class="level" data-level="متقدم">متقدم C1</div>
+ </div>
+
+ <button onclick="startLearning()">ابدأ التعلم الآن ←</button>
+
+ <div id="result">
+  <h2>🎉 رحلتك بدأت!</h2>
+  <p id="courseInfo"></p>
+  <h3>الدرس الأول: مرحبًا بالعالم</h3>
+  <p>قريبًا ستجد هنا دروسًا تفاعلية وتمارين واختبارات.</p>
+ </div>
 </main>
+
+<footer>
+ LANGORA © 2026 — Learn Every Language. Unlock Every World.
+</footer>
+
+<script>
+let selectedLanguage="الإنجليزية";
+let selectedLevel="مبتدئ";
+
+document.querySelectorAll(".language").forEach(item=>{
+ item.onclick=()=>{
+  document.querySelectorAll(".language").forEach(x=>x.classList.remove("selected"));
+  item.classList.add("selected");
+  selectedLanguage=item.dataset.language;
+ };
+});
+
+document.querySelectorAll(".level").forEach(item=>{
+ item.onclick=()=>{
+  document.querySelectorAll(".level").forEach(x=>x.classList.remove("selected"));
+  item.classList.add("selected");
+  selectedLevel=item.dataset.level;
+ };
+});
+
+function startLearning(){
+ document.getElementById("courseInfo").textContent=
+ "اللغة: "+selectedLanguage+" | المستوى: "+selectedLevel;
+ document.getElementById("result").style.display="block";
+ document.getElementById("result").scrollIntoView({behavior:"smooth"});
+}
+</script>
+
 </body>
 </html>
+
