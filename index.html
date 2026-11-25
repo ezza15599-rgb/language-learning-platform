@@ -7,15 +7,17 @@
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;padding:0;width:100%;max-width:100%;min-height:100%;overflow-x:hidden}
-body{background:#071329;color:white;font-family:Arial,sans-serif}
-button,input,select{font:inherit}button{cursor:pointer}
-.hidden{display:none!important}
-
-/* شاشة البداية وتسجيل الحساب */
+body{background:#071329;color:#fff;font-family:Arial,sans-serif;padding-bottom:76px}
+button,input,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
 .auth-page{min-height:100vh;padding:20px 14px 35px;background:radial-gradient(circle at 15% 25%,#1689e9 0,transparent 35%),linear-gradient(145deg,#061747,#0754b9 60%,#071a48)}
 .auth-top{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .auth-logo{color:#fff;font-size:clamp(23px,5vw,36px);font-weight:900;letter-spacing:1px}
 .auth-logo span{color:#ffd45e}
+.auth-language{position:relative}
+.globe-button{width:39px;height:39px;border-radius:50%;border:1px solid #ffdb78;background:#102c58;color:#fff;font-size:20px;box-shadow:0 3px 12px #00143c66}
+.language-menu{position:absolute;z-index:20;top:46px;inset-inline-end:0;width:190px;max-height:280px;overflow:auto;background:#fff;color:#10234c;border-radius:12px;padding:7px;box-shadow:0 8px 25px #00143c88}
+.language-menu button{display:block;width:100%;text-align:start;padding:9px;border:0;border-radius:8px;background:#fff;color:#10234c}
+.language-menu button:hover{background:#eaf1ff}
 .auth-layout{max-width:1100px;margin:30px auto 0;display:grid;grid-template-columns:1.1fr .9fr;gap:25px;align-items:center}
 .auth-art{text-align:center;position:relative;padding:15px 5px}
 .auth-art h2{font-size:clamp(23px,4vw,34px);color:#fff;line-height:1.5}
@@ -24,10 +26,9 @@ button,input,select{font:inherit}button{cursor:pointer}
 .art-world:before{content:"";position:absolute;width:75%;height:100%;border:2px solid #c5eaff99;border-radius:50%}
 .art-world:after{content:"";position:absolute;width:100%;height:45%;border-top:2px solid #c5eaff88;border-bottom:2px solid #c5eaff88;border-radius:50%}
 .art-earth{font-size:130px;z-index:1;filter:drop-shadow(0 8px 9px #001d52)}
-.art-owl{position:absolute;z-index:3;bottom:-20px;left:50%;transform:translateX(-50%);font-size:90px;filter:drop-shadow(0 8px 8px #00143c)}
 .speech{position:absolute;z-index:4;padding:8px 13px;border-radius:18px;color:white;font-weight:bold;box-shadow:0 5px 12px #00143c55}
-.speech.one{top:20px;left:0;background:#168bea}.speech.two{top:65px;right:0;background:#e83e52}.speech.three{bottom:35px;right:0;background:#6b38d9}
-.book-stack{display:flex;flex-direction:column;gap:5px;max-width:290px;margin:35px auto 10px}
+.speech.one{top:20px;left:0;background:#168bea}.speech.two{top:65px;right:0;background:#e83e52}.speech.three{bottom:20px;right:0;background:#6b38d9}
+.book-stack{display:flex;flex-direction:column;gap:5px;max-width:290px;margin:25px auto 10px}
 .book{padding:10px;border-radius:8px;border:2px solid #e8c36a;color:#fff;font-weight:bold;background:linear-gradient(90deg,#073777,#145eb7);box-shadow:0 4px 0 #03204c}
 .auth-slogan{font-size:23px;font-weight:bold;line-height:1.7;color:#fff}.auth-slogan span{color:#ffdc79}
 .auth-card{background:#fff;color:#10234c;border-radius:25px;padding:25px;width:100%;max-width:470px;margin:auto;box-shadow:0 15px 40px #00143c66;border:3px solid #f4d276}
@@ -46,15 +47,12 @@ button,input,select{font:inherit}button{cursor:pointer}
 .divider{display:flex;align-items:center;gap:10px;color:#71809d;margin:15px 0}.divider:before,.divider:after{content:"";height:1px;background:#d9e0ed;flex:1}
 .auth-message{min-height:22px;text-align:center;color:#b02b36;font-size:13px;margin-top:10px;line-height:1.5}
 .auth-footer{text-align:center;color:#174eaa;font-size:13px;margin-top:17px}
-
-/* المنصة الأصلية */
 #platform{display:none}
 header{width:100%;padding:16px 12px;background:#0b1c38;border-bottom:1px solid #c9a34d;text-align:center}
 .logo{color:#f2c76b;font-size:25px;font-weight:bold;margin-bottom:12px}
-.interface-box{max-width:100%;margin:auto}.interface-box label{display:block;margin-bottom:7px}
-.interface-box select{width:100%;max-width:320px;padding:12px;border-radius:10px;background:#142b50;color:white;border:1px solid #d5ae55}
+.interface-box select{width:100%;max-width:320px;padding:10px;border-radius:10px;background:#142b50;color:white;border:1px solid #d5ae55}
 main{width:100%;max-width:850px;margin:auto;padding:15px}
-.language-universe,.al-level-page,.learn-page{width:100%;max-width:100%;text-align:center;padding:25px 12px;background:#0b1933;border:1px solid #263e65;border-radius:18px;margin:15px auto}
+.language-universe,.al-level-page,.learn-page,.simple-page{width:100%;max-width:100%;text-align:center;padding:25px 12px;background:#0b1933;border:1px solid #263e65;border-radius:18px;margin:15px auto}
 .language-globe{width:245px;height:245px;max-width:85vw;max-height:85vw;margin:25px auto;border-radius:50%;position:relative;overflow:hidden;display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,#75d9ff,#2478b8 35%,#102e68 72%,#061329);box-shadow:0 0 25px #28a9ff88,inset -18px -12px 35px #02091c;animation:globeFloat 4s ease-in-out infinite}
 .language-globe:before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-linear-gradient(90deg,transparent 0 38px,#a7eaff55 39px 40px),repeating-linear-gradient(0deg,transparent 0 38px,#a7eaff44 39px 40px);transform:scaleX(.65);animation:globeSpin 12s linear infinite}
 .language-globe:after{content:"";position:absolute;width:75%;height:100%;border:2px solid #a9eaff66;border-radius:50%}
@@ -63,8 +61,8 @@ main{width:100%;max-width:850px;margin:auto;padding:15px}
 @keyframes globeFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 @keyframes globeSpin{to{background-position:80px 0,0 80px}}
 .al-language-buttons,.al-level-buttons,.learn-skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:20px}
-.al-language-buttons button,.al-level-buttons button,.back-button,.skill-button,.lesson-button{width:100%;min-width:0;padding:14px 5px;border:1px solid #d5ae55;border-radius:12px;color:white;background:#142b50;font-size:14px;cursor:pointer}
-.al-level-page,.learn-page{display:none}
+.al-language-buttons button,.al-level-buttons button,.back-button,.skill-button,.lesson-button{width:100%;min-width:0;padding:14px 5px;border:1px solid #d5ae55;border-radius:12px;color:white;background:#142b50;font-size:14px}
+.al-level-page,.learn-page,.simple-page{display:none}
 .al-level-buttons strong{display:block;font-size:21px;color:#f2c76b;margin-bottom:5px}
 #al-selected-language,#learn-language{color:#f2c76b;font-weight:bold}
 #al-choice-result{margin-top:20px;color:#f2c76b;line-height:1.8}
@@ -75,34 +73,40 @@ main{width:100%;max-width:850px;margin:auto;padding:15px}
 .lesson-area h3{text-align:center;color:#f2c76b}
 .lesson-button{display:block;text-align:start;margin:10px 0;padding:13px;background:#142b50}
 .lesson-button small{display:block;color:#c2cce0;margin-top:5px}
-.learn-back{margin-top:20px}
+.back-button{margin-top:16px}
 .logout-button{margin-top:12px;padding:9px 15px;border:1px solid #d5ae55;border-radius:10px;background:#142b50;color:white}
-@media(max-width:700px){.auth-layout{grid-template-columns:1fr;gap:10px;margin-top:18px}.auth-art{padding:5px}.auth-art h2{font-size:23px}.art-world{width:220px;height:220px}.art-earth{font-size:100px}.art-owl{font-size:75px}.book-stack{max-width:240px;margin-top:25px}.auth-slogan{font-size:19px}.auth-card{padding:20px 16px}}
-@media(max-width:360px){.globe-names{gap:5px 3px}.globe-names span{font-size:8px;padding:3px}.phone-row{grid-template-columns:100px 1fr}}
+.bottom-nav{position:fixed;z-index:30;bottom:0;left:0;right:0;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px 6px calc(8px + env(safe-area-inset-bottom));background:#091a35;border-top:1px solid #d5ae55;box-shadow:0 -5px 20px #0005}
+.bottom-nav button{border:0;border-radius:10px;background:transparent;color:#c7d4ea;padding:7px 2px;font-size:12px;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bottom-nav button span{font-size:20px}
+.bottom-nav button.active{background:#173b70;color:#ffdc79}
+@media(max-width:700px){.auth-layout{grid-template-columns:1fr;gap:10px;margin-top:18px}.auth-art{padding:5px}.auth-art h2{font-size:23px}.art-world{width:220px;height:220px}.art-earth{font-size:100px}.book-stack{max-width:240px;margin-top:20px}.auth-slogan{font-size:19px}.auth-card{padding:20px 16px}}
+@media(max-width:360px){.globe-names{gap:5px 3px}.globe-names span{font-size:8px;padding:3px}.phone-row{grid-template-columns:100px 1fr}.bottom-nav button{font-size:10px}}
 </style>
 </head>
 <body>
-
 <section class="auth-page" id="auth-page">
  <div class="auth-top">
   <div class="auth-logo">ALMONTA<span>Λ</span>ZEM</div>
-  <div style="color:#fff">🌐 Learn • Translate • Connect</div>
+  <div class="auth-language">
+   <button class="globe-button" type="button" onclick="toggleAuthLanguages()" aria-label="تغيير لغة الواجهة">🌐</button>
+   <div class="language-menu hidden" id="auth-language-menu">
+    <button onclick="setInterface('ar')">العربية</button><button onclick="setInterface('en')">English</button>
+    <button onclick="setInterface('zh')">中文</button><button onclick="setInterface('fr')">Français</button>
+    <button onclick="setInterface('de')">Deutsch</button><button onclick="setInterface('es')">Español</button>
+    <button onclick="setInterface('it')">Italiano</button><button onclick="setInterface('ru')">Русский</button>
+    <button onclick="setInterface('ja')">日本語</button><button onclick="setInterface('tr')">Türkçe</button>
+    <button onclick="setInterface('pt')">Português</button><button onclick="setInterface('hi')">हिन्दी</button>
+    <button onclick="setInterface('ko')">한국어</button>
+   </div>
+  </div>
  </div>
  <div class="auth-layout">
   <div class="auth-art">
-   <h2>🌍 عالم اللغات والترجمة</h2>
-   <div class="tagline">Learn • Translate • Connect</div>
-   <div class="art-world">
-    <div class="art-earth">🌍</div>
-    <div class="speech one">Hello!</div><div class="speech two">Bonjour!</div><div class="speech three">Hola!</div>
-    <div class="art-owl">🦉</div>
-   </div>
-   <div class="book-stack">
-    <div class="book">🇬🇧 English</div><div class="book">🇪🇸 Español</div><div class="book">🇫🇷 Français</div><div class="book">🇩🇪 Deutsch</div>
-   </div>
+   <h2>🌍 عالم اللغات والترجمة</h2><div class="tagline">Learn • Translate • Connect</div>
+   <div class="art-world"><div class="art-earth">🌍</div><div class="speech one">Hello!</div><div class="speech two">Bonjour!</div><div class="speech three">Hola!</div></div>
+   <div class="book-stack"><div class="book">🇬🇧 English</div><div class="book">🇪🇸 Español</div><div class="book">🇫🇷 Français</div><div class="book">🇩🇪 Deutsch</div></div>
    <div class="auth-slogan">تعلم اللغات...<br><span>واكتشف العالم</span></div>
   </div>
-
   <div class="auth-card">
    <h1>مرحباً بك في</h1><h1>ALMONTAΛZEM</h1>
    <p class="subtitle">منصتك لتعلم اللغات والترجمة بسهولة</p>
@@ -114,15 +118,10 @@ main{width:100%;max-width:850px;margin:auto;padding:15px}
     <div class="auth-field" id="name-field"><label for="user-name">الاسم</label><input id="user-name" type="text" placeholder="اكتب اسمك" autocomplete="name"></div>
     <div class="auth-field"><label for="user-email">البريد الإلكتروني</label><input id="user-email" type="email" placeholder="example@email.com" required autocomplete="email"></div>
     <div class="auth-field"><label for="user-password">كلمة المرور</label><input id="user-password" type="password" placeholder="اكتب كلمة المرور" required minlength="6" autocomplete="current-password"></div>
-    <div class="auth-field" id="phone-field">
-     <label for="user-phone">رقم الهاتف (اختياري)</label>
-     <div class="phone-row">
-      <select id="country-code" aria-label="كود الدولة">
-       <option value="+20">🇪🇬 +20</option><option value="+966">🇸🇦 +966</option><option value="+971">🇦🇪 +971</option><option value="+965">🇰🇼 +965</option><option value="+974">🇶🇦 +974</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option><option value="+49">🇩🇪 +49</option><option value="+34">🇪🇸 +34</option><option value="+39">🇮🇹 +39</option><option value="+90">🇹🇷 +90</option><option value="+81">🇯🇵 +81</option><option value="+86">🇨🇳 +86</option>
-      </select>
-      <input id="user-phone" type="tel" placeholder="رقم الهاتف" autocomplete="tel">
-     </div>
-    </div>
+    <div class="auth-field" id="phone-field"><label for="user-phone">رقم الهاتف (اختياري)</label><div class="phone-row">
+     <select id="country-code" aria-label="كود الدولة"><option value="+20">🇪🇬 +20</option><option value="+966">🇸🇦 +966</option><option value="+971">🇦🇪 +971</option><option value="+965">🇰🇼 +965</option><option value="+974">🇶🇦 +974</option><option value="+1">🇺🇸 +1</option><option value="+44">🇬🇧 +44</option><option value="+33">🇫🇷 +33</option><option value="+49">🇩🇪 +49</option><option value="+34">🇪🇸 +34</option><option value="+39">🇮🇹 +39</option><option value="+90">🇹🇷 +90</option><option value="+81">🇯🇵 +81</option><option value="+86">🇨🇳 +86</option></select>
+     <input id="user-phone" type="tel" placeholder="رقم الهاتف" autocomplete="tel">
+    </div></div>
     <div class="forgot-row hidden" id="forgot-row"><button type="button" onclick="forgotPassword()">هل نسيت كلمة المرور؟</button></div>
     <button class="primary-auth" id="submit-auth" type="submit">إنشاء حساب جديد</button>
    </form>
@@ -137,9 +136,8 @@ main{width:100%;max-width:850px;margin:auto;padding:15px}
 <div id="platform">
 <header>
  <div class="logo">ALMONTAΛZEM</div>
- <div class="interface-box">
-  <label for="interfaceLanguage">🌐 Interface Language</label>
-  <select id="interfaceLanguage" onchange="changeInterface(this.value)">
+ <div class="interface-box"><label for="interfaceLanguage">🌐 Interface Language</label>
+  <select id="interfaceLanguage" onchange="setInterface(this.value)">
    <option value="ar">العربية</option><option value="en">English</option><option value="zh">中文</option><option value="fr">Français</option><option value="de">Deutsch</option><option value="es">Español</option><option value="it">Italiano</option><option value="ru">Русский</option><option value="ja">日本語</option><option value="tr">Türkçe</option><option value="pt">Português</option><option value="hi">हिन्दी</option><option value="ko">한국어</option>
   </select>
  </div>
@@ -148,38 +146,40 @@ main{width:100%;max-width:850px;margin:auto;padding:15px}
 <main>
 <section class="language-universe" id="al-universe">
  <h2 id="main-title">🌍 عالم اللغات</h2><p id="main-description">عالم واحد، لغات كثيرة</p>
- <div class="language-globe"><div class="globe-names">
-  <span>العربية</span><span>ENGLISH</span><span>ESPAÑOL</span><span>FRANÇAIS</span><span>DEUTSCH</span><span>中文</span><span>ITALIANO</span><span>РУССКИЙ</span><span>日本語</span><span>TÜRKÇE</span><span>PORTUGUÊS</span><span>हिन्दी</span><span>한국어</span>
- </div></div>
+ <div class="language-globe"><div class="globe-names"><span>العربية</span><span>ENGLISH</span><span>ESPAÑOL</span><span>FRANÇAIS</span><span>DEUTSCH</span><span>中文</span><span>ITALIANO</span><span>РУССКИЙ</span><span>日本語</span><span>TÜRKÇE</span><span>PORTUGUÊS</span><span>हिन्दी</span><span>한국어</span></div></div>
  <h3 id="choose-language-title">اختر اللغة التي تريد تعلمها</h3>
  <div class="al-language-buttons">
   <button onclick="alChooseLanguage('English')">🇬🇧 English</button><button onclick="alChooseLanguage('Spanish')">🇪🇸 Spanish</button><button onclick="alChooseLanguage('French')">🇫🇷 French</button><button onclick="alChooseLanguage('German')">🇩🇪 German</button><button onclick="alChooseLanguage('Italian')">🇮🇹 Italian</button><button onclick="alChooseLanguage('Arabic')">🇪🇬 Arabic</button><button onclick="alChooseLanguage('Chinese')">🇨🇳 Chinese</button><button onclick="alChooseLanguage('Japanese')">🇯🇵 Japanese</button><button onclick="alChooseLanguage('Turkish')">🇹🇷 Turkish</button><button onclick="alChooseLanguage('Russian')">🇷🇺 Russian</button>
  </div>
 </section>
-
 <section class="al-level-page" id="al-level-page">
  <h2 id="level-title">Choose Your Level</h2><p id="learning-language-label">لغة التعلم:</p><p><span id="al-selected-language"></span></p><p id="level-description">اختر مستواك</p>
  <div class="al-level-buttons">
   <button onclick="alChooseLevel('A1','Beginner')"><strong>A1</strong>Beginner</button><button onclick="alChooseLevel('A2','Elementary')"><strong>A2</strong>Elementary</button><button onclick="alChooseLevel('B1','Intermediate')"><strong>B1</strong>Intermediate</button><button onclick="alChooseLevel('B2','Upper Intermediate')"><strong>B2</strong>Upper Intermediate</button><button onclick="alChooseLevel('C1','Advanced')"><strong>C1</strong>Advanced</button><button onclick="alChooseLevel('C2','Proficiency')"><strong>C2</strong>Proficiency</button>
  </div>
- <div id="al-choice-result"></div><br><button class="back-button" onclick="alGoBack()">← Back to Languages</button>
+ <div id="al-choice-result"></div><button class="back-button" onclick="alGoBack()">← Back to Languages</button>
 </section>
-
 <section class="learn-page" id="learn-page">
- <h2 class="learn-heading">📚 LEARN</h2>
- <p>Learning Language: <span id="learn-language"></span></p><p>Your Level: <strong id="learn-level" style="color:#f2c76b"></strong></p><p>Choose a skill to start learning</p>
+ <h2 class="learn-heading">📚 LEARN</h2><p>Learning Language: <span id="learn-language"></span></p><p>Your Level: <strong id="learn-level" style="color:#f2c76b"></strong></p><p>Choose a skill to start learning</p>
  <div class="learn-skills">
   <button class="skill-button active" onclick="showSkill('vocabulary',this)"><span>📚</span>Vocabulary</button><button class="skill-button" onclick="showSkill('grammar',this)"><span>📝</span>Grammar</button><button class="skill-button" onclick="showSkill('reading',this)"><span>📖</span>Reading</button><button class="skill-button" onclick="showSkill('listening',this)"><span>🎧</span>Listening</button><button class="skill-button" onclick="showSkill('writing',this)"><span>✍️</span>Writing</button><button class="skill-button" onclick="showSkill('speaking',this)"><span>🗣️</span>Speaking</button>
  </div>
  <div class="lesson-area" id="lesson-area"><h3>Vocabulary Lessons</h3><div id="lesson-list"></div></div>
- <button class="back-button learn-back" onclick="backToLevels()">← Back to Levels</button>
+ <button class="back-button" onclick="backToLevels()">← Back to Levels</button>
 </section>
+<section class="simple-page" id="review-page"><h2>🔄 Review</h2><p>هنا ستظهر مراجعاتك ودروسك السابقة.</p></section>
+<section class="simple-page" id="community-page"><h2>👥 Community</h2><p>هنا ستظهر مساحة المجتمع والتواصل.</p></section>
+<section class="simple-page" id="profile-page"><h2>👤 الملف الشخصي</h2><p id="profile-name">المستخدم</p><p id="profile-email"></p><p id="profile-uid" style="font-size:11px;color:#aebbd2;overflow-wrap:anywhere"></p></section>
 </main>
+<nav class="bottom-nav" id="bottom-nav">
+ <button class="active" onclick="showPage('home',this)"><span>🏠</span>Home</button>
+ <button onclick="showPage('review',this)"><span>🔄</span>Review</button>
+ <button onclick="showPage('community',this)"><span>👥</span>Community</button>
+ <button onclick="showPage('profile',this)"><span>👤</span>الملف الشخصي</button>
+</nav>
 </div>
 
 <script>
-/* ملاحظة: هذه واجهة تجريبية. تسجيل الحساب وGoogle واستعادة كلمة المرور
-   تحتاج لاحقاً إلى ربط خدمة مصادقة مثل Firebase. */
 let authMode="signup";window.authMode=authMode;
 function setAuthMode(mode){
  authMode=mode;window.authMode=mode;const signup=mode==="signup";
@@ -191,40 +191,21 @@ function setAuthMode(mode){
  document.getElementById("submit-auth").textContent=signup?"إنشاء حساب جديد":"تسجيل الدخول";
  document.getElementById("auth-message").textContent="";
 }
-function submitAuth(event){
- event.preventDefault();
- const email=document.getElementById("user-email").value.trim();
- const password=document.getElementById("user-password").value;
- const name=document.getElementById("user-name").value.trim();
- const message=document.getElementById("auth-message");
- if(authMode==="signup"&&!name){message.textContent="من فضلك اكتب اسمك.";return}
- if(!email||!password){message.textContent="أكمل البيانات المطلوبة.";return}
- message.style.color="#187443";
- message.textContent="واجهة تجريبية: تم إدخال البيانات، لكن الحساب لم يُنشأ فعلياً بعد.";
- setTimeout(enterPlatform,900);
+function toggleAuthLanguages(){document.getElementById("auth-language-menu").classList.toggle("hidden")}
+function showAuthMessage(message,success=false){const box=document.getElementById("auth-message");box.style.color=success?"#187443":"#b02b36";box.textContent=message}
+function setInterface(lang){
+ const t=interfaceTexts[lang]||interfaceTexts.en;
+ document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
+ document.getElementById("main-title").textContent=t[0];
+ document.getElementById("main-description").textContent=t[1];
+ document.getElementById("choose-language-title").textContent=t[2];
+ document.getElementById("level-title").textContent=t[3];
+ document.getElementById("learning-language-label").textContent=t[4];
+ document.getElementById("level-description").textContent=t[3];
+ const select=document.getElementById("interfaceLanguage");if(select)select.value=lang;
+ document.getElementById("auth-language-menu").classList.add("hidden");
+ try{localStorage.setItem("alInterfaceLanguage",lang)}catch(e){}
 }
-function googleSignIn(){
- const m=document.getElementById("auth-message");
- m.style.color="#b02b36";
- m.textContent="زر Google جاهز شكلياً، ويحتاج ربط Firebase لتفعيل تسجيل الدخول الحقيقي.";
-}
-function forgotPassword(){
- const m=document.getElementById("auth-message");
- m.style.color="#174eaa";
- m.textContent="استعادة كلمة المرور تحتاج ربط خدمة الحسابات وإرسال بريد إلكتروني.";
-}
-function enterPlatform(){
- document.getElementById("auth-page").style.display="none";
- document.getElementById("platform").style.display="block";
- window.scrollTo({top:0,behavior:"smooth"});
-}
-function logout(){
- document.getElementById("platform").style.display="none";
- document.getElementById("auth-page").style.display="block";
- setAuthMode("login");window.scrollTo({top:0,behavior:"smooth"});
-}
-
-let alLearningLanguage="",alLearningLevel="";
 const interfaceTexts={
  ar:["🌍 عالم اللغات","عالم واحد، لغات كثيرة","اختر اللغة التي تريد تعلمها","اختر مستواك","لغة التعلم:"],
  en:["🌍 Language World","One World, Many Languages","Choose Your Language","Choose Your Level","Learning language:"],
@@ -240,33 +221,17 @@ const interfaceTexts={
  hi:["🌍 भाषाओं की दुनिया","एक दुनिया, कई भाषाएँ","अपनी भाषा चुनें","अपना स्तर चुनें","सीखने की भाषा:"],
  ko:["🌍 언어의 세계","하나의 세계, 다양한 언어","배울 언어 선택","레벨 선택","학습 언어:"]
 };
-function changeInterface(lang){
- const t=interfaceTexts[lang]||interfaceTexts.en;
- document.documentElement.lang=lang;document.documentElement.dir=lang==="ar"?"rtl":"ltr";
- document.getElementById("main-title").textContent=t[0];
- document.getElementById("main-description").textContent=t[1];
- document.getElementById("choose-language-title").textContent=t[2];
- document.getElementById("level-title").textContent=t[3];
- document.getElementById("learning-language-label").textContent=t[4];
- document.getElementById("level-description").textContent=t[3];
- try{localStorage.setItem("alInterfaceLanguage",lang)}catch(e){}
-}
+let alLearningLanguage="",alLearningLevel="";
 function alChooseLanguage(language){
- alLearningLanguage=language;
- document.getElementById("al-selected-language").textContent=language;
- document.getElementById("al-universe").style.display="none";
- document.getElementById("al-level-page").style.display="block";
- document.getElementById("al-choice-result").textContent="";
- document.getElementById("al-level-page").scrollIntoView({behavior:"smooth"});
+ alLearningLanguage=language;document.getElementById("al-selected-language").textContent=language;
+ hideAllPages();document.getElementById("al-level-page").style.display="block";
+ document.getElementById("al-choice-result").textContent="";document.getElementById("al-level-page").scrollIntoView({behavior:"smooth"});
 }
 function alChooseLevel(level,name){
- alLearningLevel=level;
- document.getElementById("learn-language").textContent=alLearningLanguage;
+ alLearningLevel=level;document.getElementById("learn-language").textContent=alLearningLanguage;
  document.getElementById("learn-level").textContent=level+" - "+name;
- document.getElementById("al-level-page").style.display="none";
- document.getElementById("learn-page").style.display="block";
- showSkill("vocabulary",document.querySelector(".skill-button"));
- document.getElementById("learn-page").scrollIntoView({behavior:"smooth"});
+ hideAllPages();document.getElementById("learn-page").style.display="block";
+ showSkill("vocabulary",document.querySelector(".skill-button"));document.getElementById("learn-page").scrollIntoView({behavior:"smooth"});
 }
 const skillLessons={
  vocabulary:["Basic Words","Everyday Vocabulary","People and Places","Food and Daily Life"],
@@ -278,191 +243,77 @@ const skillLessons={
 };
 const skillTitles={vocabulary:"Vocabulary Lessons",grammar:"Grammar Lessons",reading:"Reading Lessons",listening:"Listening Lessons",writing:"Writing Lessons",speaking:"Speaking Lessons"};
 function showSkill(skill,button){
- document.querySelectorAll(".skill-button").forEach(b=>b.classList.remove("active"));
- if(button)button.classList.add("active");
- document.querySelector("#lesson-area h3").textContent=skillTitles[skill];
- const list=document.getElementById("lesson-list");list.innerHTML="";
- skillLessons[skill].forEach((lesson,index)=>{
-  const item=document.createElement("button");item.className="lesson-button";
-  item.innerHTML="Lesson "+(index+1)+": "+lesson+"<small>"+alLearningLanguage+" • "+alLearningLevel+"</small>";
-  item.onclick=()=>showLessonMessage(lesson,skill,index+1);list.appendChild(item);
- });
+ document.querySelectorAll(".skill-button").forEach(b=>b.classList.remove("active"));if(button)button.classList.add("active");
+ document.querySelector("#lesson-area h3").textContent=skillTitles[skill];const list=document.getElementById("lesson-list");list.innerHTML="";
+ skillLessons[skill].forEach((lesson,index)=>{const item=document.createElement("button");item.className="lesson-button";item.innerHTML="Lesson "+(index+1)+": "+lesson+"<small>"+alLearningLanguage+" • "+alLearningLevel+"</small>";item.onclick=()=>showLessonMessage(lesson,skill);list.appendChild(item)});
 }
-function showLessonMessage(lesson,skill,number){
+function showLessonMessage(lesson,skill){
  const list=document.getElementById("lesson-list");list.innerHTML="";
  const title=document.createElement("p");title.style.color="#f2c76b";title.textContent=lesson;
  const info=document.createElement("p");info.textContent="محتوى الدرس والتمارين سيتم إضافته في مرحلة بناء الدروس.";
- const lang=document.createElement("p");lang.textContent="Language: "+alLearningLanguage+" | Level: "+alLearningLevel;
- const back=document.createElement("button");back.className="back-button";back.textContent="← Back to lessons";
- back.onclick=()=>showSkill(skill,document.querySelector(".skill-button.active"));
- list.append(title,info,lang,back);
+ const back=document.createElement("button");back.className="back-button";back.textContent="← Back to lessons";back.onclick=()=>showSkill(skill,document.querySelector(".skill-button.active"));list.append(title,info,back);
 }
-function alGoBack(){
- document.getElementById("al-level-page").style.display="none";
- document.getElementById("al-universe").style.display="block";
- document.getElementById("al-universe").scrollIntoView({behavior:"smooth"});
+function hideAllPages(){["al-universe","al-level-page","learn-page","review-page","community-page","profile-page"].forEach(id=>document.getElementById(id).style.display="none")}
+function showPage(page,button){
+ document.querySelectorAll(".bottom-nav button").forEach(b=>b.classList.remove("active"));if(button)button.classList.add("active");
+ hideAllPages();
+ if(page==="home"){document.getElementById("al-universe").style.display="block";if(alLearningLevel)document.getElementById("learn-page").style.display="block"}
+ else document.getElementById(page+"-page").style.display="block";
+ window.scrollTo({top:0,behavior:"smooth"});
 }
-function backToLevels(){
- document.getElementById("learn-page").style.display="none";
- document.getElementById("al-level-page").style.display="block";
- document.getElementById("al-level-page").scrollIntoView({behavior:"smooth"});
+function alGoBack(){hideAllPages();document.getElementById("al-universe").style.display="block"}
+function backToLevels(){hideAllPages();document.getElementById("al-level-page").style.display="block"}
+function updateProfile(user){
+ document.getElementById("profile-name").textContent=user.displayName||"مستخدم ALMONTAZEM";
+ document.getElementById("profile-email").textContent=user.email||"";
+ document.getElementById("profile-uid").textContent="UID: "+user.uid;
 }
-try{
- const savedLanguage=localStorage.getItem("alInterfaceLanguage");
- if(savedLanguage&&interfaceTexts[savedLanguage]){
-  document.getElementById("interfaceLanguage").value=savedLanguage;
-  changeInterface(savedLanguage);
- }
-}catch(e){}
+try{const saved=localStorage.getItem("alInterfaceLanguage");if(saved&&interfaceTexts[saved])setInterface(saved)}catch(e){}
 </script>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithRedirect,
-  getRedirectResult,
-  onAuthStateChanged,
-  sendPasswordResetEmail,
-  updateProfile,
-  signOut
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyA_6sf5f2m81AUhwcxegejZzJRGGrQDUMc",
-  authDomain: "almontazem.firebaseapp.com",
-  projectId: "almontazem",
-  storageBucket: "almontazem.firebasestorage.app",
-  messagingSenderId: "370337192110",
-  appId: "1:370337192110:web:bea4071d60fb917dd2753f"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
-function showAuthMessage(message, success = false) {
-  const box = document.getElementById("auth-message");
-  box.style.color = success ? "#187443" : "#b02b36";
-  box.textContent = message;
+import {getAuth,createUserWithEmailAndPassword,signInWithEmailAndPassword,GoogleAuthProvider,signInWithRedirect,getRedirectResult,onAuthStateChanged,sendPasswordResetEmail,updateProfile,signOut} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+const firebaseConfig={apiKey:"AIzaSyA_6sf5f2m81AUhwcxegejZzJRGGrQDUMc",authDomain:"almontazem.firebaseapp.com",projectId:"almontazem",storageBucket:"almontazem.firebasestorage.app",messagingSenderId:"370337192110",appId:"1:370337192110:web:bea4071d60fb917dd2753f"};
+const app=initializeApp(firebaseConfig),auth=getAuth(app);
+function readableAuthError(error){
+ const code=error?.code||"",messages={
+ "auth/email-already-in-use":"هذا البريد مسجل بالفعل. جرّب تسجيل الدخول.","auth/invalid-email":"البريد الإلكتروني غير صحيح.",
+ "auth/weak-password":"كلمة المرور ضعيفة. استخدم 6 أحرف على الأقل.","auth/invalid-credential":"البريد الإلكتروني أو كلمة المرور غير صحيحة.",
+ "auth/user-not-found":"لا يوجد حساب بهذا البريد. أنشئ حسابًا جديدًا.","auth/wrong-password":"كلمة المرور غير صحيحة.",
+ "auth/too-many-requests":"محاولات كثيرة. انتظر قليلًا ثم حاول مرة أخرى.","auth/network-request-failed":"تحقق من اتصال الإنترنت ثم حاول مرة أخرى.",
+ "auth/popup-closed-by-user":"تم إغلاق نافذة Google قبل إكمال تسجيل الدخول.","auth/unauthorized-domain":"عنوان الموقع غير مضاف إلى النطاقات المسموح بها في Firebase.",
+ "auth/operation-not-allowed":"طريقة تسجيل الدخول هذه غير مفعّلة في Firebase.","auth/account-exists-with-different-credential":"هذا البريد مرتبط بطريقة تسجيل دخول أخرى."
+ };return messages[code]||"حدث خطأ أثناء العملية. تأكد من البيانات وحاول مرة أخرى.";
 }
-
-function readableAuthError(error) {
-  const code = error?.code || "";
-  const messages = {
-    "auth/email-already-in-use": "هذا البريد مسجل بالفعل. جرّب تسجيل الدخول.",
-    "auth/invalid-email": "البريد الإلكتروني غير صحيح.",
-    "auth/weak-password": "كلمة المرور ضعيفة. استخدم 6 أحرف على الأقل.",
-    "auth/invalid-credential": "البريد الإلكتروني أو كلمة المرور غير صحيحة.",
-    "auth/user-not-found": "لا يوجد حساب بهذا البريد. أنشئ حسابًا جديدًا.",
-    "auth/wrong-password": "كلمة المرور غير صحيحة.",
-    "auth/too-many-requests": "محاولات كثيرة. انتظر قليلًا ثم حاول مرة أخرى.",
-    "auth/network-request-failed": "تحقق من اتصال الإنترنت ثم حاول مرة أخرى.",
-    "auth/popup-closed-by-user": "تم إغلاق نافذة Google قبل إكمال تسجيل الدخول.",
-    "auth/unauthorized-domain": "عنوان الموقع غير مضاف إلى النطاقات المسموح بها في Firebase.",
-    "auth/operation-not-allowed": "طريقة تسجيل الدخول هذه غير مفعّلة في Firebase.",
-    "auth/account-exists-with-different-credential": "هذا البريد مرتبط بطريقة تسجيل دخول أخرى."
-  };
-  return messages[code] || "حدث خطأ أثناء العملية. تأكد من البيانات وحاول مرة أخرى.";
-}
-
-window.submitAuth = async function(event) {
-  event.preventDefault();
-
-  const email = document.getElementById("user-email").value.trim();
-  const password = document.getElementById("user-password").value;
-  const name = document.getElementById("user-name").value.trim();
-  const button = document.getElementById("submit-auth");
-
-  if (!email || !password) {
-    showAuthMessage("اكتب البريد الإلكتروني وكلمة المرور.");
-    return;
-  }
-  if (window.authMode === "signup" && !name) {
-    showAuthMessage("من فضلك اكتب اسمك.");
-    return;
-  }
-  if (password.length < 6) {
-    showAuthMessage("كلمة المرور يجب أن تكون 6 أحرف على الأقل.");
-    return;
-  }
-
-  button.disabled = true;
-  button.textContent = "جارٍ التنفيذ...";
-  try {
-    if (window.authMode === "signup") {
-      const result = await createUserWithEmailAndPassword(auth, email, password);
-      await updateProfile(result.user, { displayName: name });
-      showAuthMessage("تم إنشاء حسابك بنجاح.", true);
-    } else {
-      await signInWithEmailAndPassword(auth, email, password);
-      showAuthMessage("تم تسجيل الدخول بنجاح.", true);
-    }
-  } catch (error) {
-    showAuthMessage(readableAuthError(error));
-  } finally {
-    button.disabled = false;
-    button.textContent = window.authMode === "signup" ? "إنشاء حساب جديد" : "تسجيل الدخول";
-  }
+window.submitAuth=async function(event){
+ event.preventDefault();const email=document.getElementById("user-email").value.trim(),password=document.getElementById("user-password").value,name=document.getElementById("user-name").value.trim(),button=document.getElementById("submit-auth");
+ if(!email||!password){showAuthMessage("اكتب البريد الإلكتروني وكلمة المرور.");return}
+ if(window.authMode==="signup"&&!name){showAuthMessage("من فضلك اكتب اسمك.");return}
+ if(password.length<6){showAuthMessage("كلمة المرور يجب أن تكون 6 أحرف على الأقل.");return}
+ button.disabled=true;button.textContent="جارٍ التنفيذ...";
+ try{
+  if(window.authMode==="signup"){const result=await createUserWithEmailAndPassword(auth,email,password);await updateProfile(result.user,{displayName:name});showAuthMessage("تم إنشاء حسابك بنجاح.",true)}
+  else{await signInWithEmailAndPassword(auth,email,password);showAuthMessage("تم تسجيل الدخول بنجاح.",true)}
+ }catch(error){showAuthMessage(readableAuthError(error))}
+ finally{button.disabled=false;button.textContent=window.authMode==="signup"?"إنشاء حساب جديد":"تسجيل الدخول"}
 };
-
-window.googleSignIn = async function() {
-  const provider = new GoogleAuthProvider();
-  provider.setCustomParameters({ prompt: "select_account" });
-  try {
-    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-      await signInWithRedirect(auth, provider);
-    } else {
-      await signInWithPopup(auth, provider);
-    }
-  } catch (error) {
-    showAuthMessage(readableAuthError(error));
-  }
+window.googleSignIn=async function(){
+ const provider=new GoogleAuthProvider();provider.setCustomParameters({prompt:"select_account"});
+ try{await signInWithRedirect(auth,provider)}catch(error){showAuthMessage(readableAuthError(error))}
 };
-
-window.forgotPassword = async function() {
-  const email = document.getElementById("user-email").value.trim();
-  if (!email) {
-    showAuthMessage("اكتب بريدك الإلكتروني أولًا، ثم اضغط نسيت كلمة المرور.");
-    return;
-  }
-  try {
-    await sendPasswordResetEmail(auth, email);
-    showAuthMessage("لو البريد مسجل، هتوصلك رسالة لإعادة تعيين كلمة المرور. راجع الوارد والرسائل غير المرغوب فيها.", true);
-  } catch (error) {
-    showAuthMessage(readableAuthError(error));
-  }
+window.forgotPassword=async function(){
+ const email=document.getElementById("user-email").value.trim();if(!email){showAuthMessage("اكتب بريدك الإلكتروني أولًا.");return}
+ try{await sendPasswordResetEmail(auth,email);showAuthMessage("لو البريد مسجل، هتوصلك رسالة لإعادة تعيين كلمة المرور. راجع الوارد والرسائل غير المرغوب فيها.",true)}
+ catch(error){showAuthMessage(readableAuthError(error))}
 };
-
-window.logout = async function() {
-  try {
-    await signOut(auth);
-  } catch (error) {
-    showAuthMessage(readableAuthError(error));
-  }
-};
-
-getRedirectResult(auth).catch(error => showAuthMessage(readableAuthError(error)));
-
-onAuthStateChanged(auth, user => {
-  if (user) {
-    const authPage = document.getElementById("auth-page");
-    const platform = document.getElementById("platform");
-    if (authPage) authPage.style.display = "none";
-    if (platform) platform.style.display = "block";
-    window.scrollTo({ top: 0, behavior: "instant" });
-  } else {
-    const authPage = document.getElementById("auth-page");
-    const platform = document.getElementById("platform");
-    if (platform) platform.style.display = "none";
-    if (authPage) authPage.style.display = "block";
-  }
+window.logout=async function(){try{await signOut(auth)}catch(error){showAuthMessage(readableAuthError(error))}};
+getRedirectResult(auth).catch(error=>showAuthMessage(readableAuthError(error)));
+onAuthStateChanged(auth,user=>{
+ const authPage=document.getElementById("auth-page"),platform=document.getElementById("platform");
+ if(user){authPage.style.display="none";platform.style.display="block";updateProfile(user);window.scrollTo({top:0,behavior:"instant"})}
+ else{platform.style.display="none";authPage.style.display="block"}
 });
 </script>
-
 </body>
 </html>
-
